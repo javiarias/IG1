@@ -13,6 +13,8 @@ public:
 	static Mesh* createRGBAxes(GLdouble l); // creates a new 3D RGB axes mesh
 	static Mesh* generaPoliespiral(glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
 	static Mesh* generaDragon(GLuint numVert);
+	static Mesh* generaTriangulo(GLdouble r);
+	static Mesh* generaTrianguloRGB(GLdouble r);
  
 	Mesh(void) { };
 	~Mesh(void);

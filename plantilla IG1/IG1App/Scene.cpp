@@ -17,7 +17,7 @@ void Scene::init()
   // meshes
 
   // Graphics objects (entities) of the scene
-  grObjects.push_back(new Dragon(30000));
+  grObjects.push_back(new TrianguloRGB(3));
  
 }
 //-------------------------------------------------------------------------

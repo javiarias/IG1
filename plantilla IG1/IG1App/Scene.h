@@ -10,6 +10,7 @@
 //#include "Mesh.h"
 #include "Poliespiral.h"
 #include "Dragon.h"
+#include "TrianguloRGB.h"
 
 #include <vector>
 

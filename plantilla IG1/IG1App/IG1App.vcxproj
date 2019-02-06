@@ -126,6 +126,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Poliespiral.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="TrianguloRGB.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +137,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Poliespiral.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TrianguloRGB.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
