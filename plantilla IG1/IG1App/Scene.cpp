@@ -50,21 +50,27 @@ void Scene::init()
 	  grObjects.push_back(new Poliespiral(dvec2(0.0, 0.0), 12.5, 165, 1, 1.3, 56));*/
 
 	  //triangulo animado
-	  auxEntity = new TrianguloAnimado(5, 1.50);
+	  auxEntity = new TrianguloAnimado(5, 1.0);
 	  auxMat = auxEntity->getModelMat();
 	  auxMat = translate(auxMat, dvec3(5.0, 15.0, 0.0));
 	  auxEntity->setModelMat(auxMat);
 	  grObjects.push_back(auxEntity);
 
-	  auxEntity = new TrianguloAnimado(5, 2.017);
+	  auxEntity = new TrianguloAnimado(5, 1.0);
 	  auxMat = auxEntity->getModelMat();
-	  auxMat = translate(auxMat, dvec3(10.0, 30.0, 0.0));
+	  auxMat = translate(auxMat, dvec3(7.0, 17.0, 0.0));
 	  auxEntity->setModelMat(auxMat);
 	  grObjects.push_back(auxEntity);
 
-	  auxEntity = new TrianguloAnimado(5, 4.319);
+	  auxEntity = new TrianguloAnimado(5, 1.0);
 	  auxMat = auxEntity->getModelMat();
-	  auxMat = translate(auxMat, dvec3(15.0, 45.0, 0.0));
+	  auxMat = translate(auxMat, dvec3(9.0, 19.0, 0.0));
+	  auxEntity->setModelMat(auxMat);
+	  grObjects.push_back(auxEntity);
+
+	  auxEntity = new TrianguloAnimado(5, 1.0);
+	  auxMat = auxEntity->getModelMat();
+	  auxMat = translate(auxMat, dvec3(11.0, 21.0, 0.0));
 	  auxEntity->setModelMat(auxMat);
 	  grObjects.push_back(auxEntity);
 }
