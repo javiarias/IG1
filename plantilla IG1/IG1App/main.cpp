@@ -80,7 +80,7 @@ void display()   // double buffering
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
   
-  scene.render(camera);   
+  scene.render(camera);
     
   glutSwapBuffers();  
 }
@@ -116,6 +116,9 @@ void key(unsigned char key, int x, int y)
   case 'o':
 	camera.set2D();
 	break;
+  case 'u':
+	  scene.update();
+	  break;
   default:
 	need_redisplay = false;
     break;

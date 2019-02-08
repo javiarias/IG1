@@ -17,6 +17,7 @@ public:
 	virtual ~Entity() { };
 
 	virtual void render(Camera const& cam) = 0;
+	virtual void update() {}
 
 	// modeling matrix
 	glm::dmat4 const& getModelMat() const { return modelMat; };
@@ -39,7 +40,7 @@ class EjesRGB : public Entity
 public:
 	EjesRGB(GLdouble l);
 	~EjesRGB();
-	virtual void render(Camera const& cam); 
+	virtual void render(Camera const& cam);
 };
 
 //-------------------------------------------------------------------------

@@ -132,8 +132,8 @@ Mesh* Mesh::generaTriangulo(GLdouble r) {
 	GLdouble x = 0, y = 0;
 	for (int i = 0; i < 3; i++) {
 		
-		x = r * (cos(radians(120.0 * i)));
-		y = r * (sin(radians(120.0 * i)));
+		x = r * (cos(radians((120.0 * i) + 90.0)));
+		y = r * (sin(radians((120.0 * i) + 90.0)));
 
 		m->vertices[i] = dvec3(x, y, 0.0);
 	}
@@ -148,6 +148,36 @@ Mesh* Mesh::generaTrianguloRGB(GLdouble r) {
 	m->colors[2] = dvec4(0.0, 1.0, 0.0, 1.0);
 
 	
+
+	return m;
+}
+
+Mesh* Mesh::generaRectangulo(GLdouble w, GLdouble h) {
+	Mesh* m = new Mesh();
+	m->primitive = GL_TRIANGLE_STRIP;
+	m->numVertices = 4;
+
+	m->vertices = new dvec3[m->numVertices];
+
+	GLdouble x = 0, y = 0;
+	m->vertices[0] = dvec3(-w / 2, h / 2, 0.0);
+	m->vertices[1] = dvec3(-w / 2, -h / 2, 0.0);
+	m->vertices[2] = dvec3(w / 2, h / 2, 0.0);
+	m->vertices[3] = dvec3(w / 2, -h / 2, 0.0);
+
+	return m;
+}
+
+Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
+	Mesh* m = generaRectangulo(w, h);
+	m->colors = new dvec4[4];
+
+	m->colors[0] = dvec4(1.0, 0.0, 0.0, 1.0);
+	m->colors[1] = dvec4(0.0, 0.0, 1.0, 1.0);
+	m->colors[2] = dvec4(0.0, 1.0, 0.0, 1.0);
+	m->colors[3] = dvec4(1.0, 0.0, 0.0, 1.0);
+
+
 
 	return m;
 }

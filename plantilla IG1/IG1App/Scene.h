@@ -11,6 +11,8 @@
 #include "Poliespiral.h"
 #include "Dragon.h"
 #include "TrianguloRGB.h"
+#include "Rectangulo.h"
+#include "TrianguloAnimado.h"
 
 #include <vector>
 
@@ -24,6 +26,8 @@ public:
     void init(); 
 
     void render(Camera const& cam);
+
+	void update();
 	  
 protected:
 

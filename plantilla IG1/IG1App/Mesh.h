@@ -15,6 +15,8 @@ public:
 	static Mesh* generaDragon(GLuint numVert);
 	static Mesh* generaTriangulo(GLdouble r);
 	static Mesh* generaTrianguloRGB(GLdouble r);
+	static Mesh* generaRectangulo(GLdouble w, GLdouble h);
+	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);
  
 	Mesh(void) { };
 	~Mesh(void);
