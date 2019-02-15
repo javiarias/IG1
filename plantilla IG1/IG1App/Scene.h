@@ -13,6 +13,8 @@
 #include "TrianguloRGB.h"
 #include "Rectangulo.h"
 #include "TrianguloAnimado.h"
+#include "Estrella3D.h"
+#include "Caja.h"
 
 #include <vector>
 

@@ -4,7 +4,7 @@
 
 Rectangulo::Rectangulo(GLdouble w, GLdouble h)
 {
-	mesh = Mesh::generaRectanguloRGB(w, h);
+	mesh = Mesh::generaRectangulo(w, h);
 }
 
 
@@ -15,10 +15,10 @@ void Rectangulo::render(Camera const& cam)
 {
 	if (mesh != nullptr) {
 		uploadMvM(cam.getViewMat());
-		glPointSize(2);
-		glPolygonMode(GL_BACK, GL_LINE);
-		glColor3d(1, 0.876456354, 0.324845312);
+		glLineWidth(2);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glColor3d(0.0, 0.0, 0.0);
 		mesh->render();
-		glPointSize(1);
+		glLineWidth(1);
 	}
 }

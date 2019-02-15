@@ -181,4 +181,64 @@ Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
 
 	return m;
 }
+
+Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h) {
+	Mesh* m = new Mesh();
+	m->primitive = GL_TRIANGLE_FAN;
+	m->numVertices = 2 * np + 2;
+
+	m->vertices = new dvec3[m->numVertices];
+
+	m->vertices[0] = dvec3(0, 0, 0);
+
+	GLdouble angleIncrement = 360 / (2 * np);
+
+	for (int i = 0; i < 2 * np + 1; i++) {
+		GLdouble x = 0, y = 0;
+
+		if (i % 2 != 0) {
+			x = cos(radians(angleIncrement * -i)) * re;
+			y = sin(radians(angleIncrement * -i)) * re;
+		}
+
+		else {
+			x = cos(radians(angleIncrement * -i)) * (re / 2);
+			y = sin(radians(angleIncrement * -i)) * (re / 2);
+		}
+
+
+		m->vertices[i + 1] = dvec3(x, y, h);
+	}
+
+	return m;
+}
+
+
+
+Mesh* Mesh::generaContCubo(GLdouble l) {
+	Mesh* m = new Mesh();
+	m->primitive = GL_TRIANGLE_STRIP;
+	m->numVertices = 10;
+
+	m->vertices = new dvec3[m->numVertices];
+
+	GLdouble x = l / 2, y = l / 2, z = l / 2;
+
+	m->vertices[0] = dvec3(-x, y, z);
+	m->vertices[1] = dvec3(-x, -y, z);
+
+	m->vertices[2] = dvec3(x, y, z);
+	m->vertices[3] = dvec3(x, -y, z);
+
+	m->vertices[4] = dvec3(x, y, -z);
+	m->vertices[5] = dvec3(x, -y, -z);
+
+	m->vertices[6] = dvec3(-x, y, -z);
+	m->vertices[7] = dvec3(-x, -y, -z);
+
+	m->vertices[8] = dvec3(-x, y, z);
+	m->vertices[9] = dvec3(-x, -y, z);
+
+	return m;
+}
 //-------------------------------------------------------------------------

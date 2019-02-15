@@ -120,9 +120,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Caja.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Estrella3D.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Poliespiral.h" />
     <ClInclude Include="Rectangulo.h" />
@@ -132,9 +134,11 @@
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Caja.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Estrella3D.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Poliespiral.cpp" />

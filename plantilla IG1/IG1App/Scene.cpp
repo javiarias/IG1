@@ -50,7 +50,7 @@ void Scene::init()
 	  grObjects.push_back(new Poliespiral(dvec2(0.0, 0.0), 12.5, 165, 1, 1.3, 56));*/
 
 	  //triangulo animado
-	  auxEntity = new TrianguloAnimado(5, 1.0);
+	  /*auxEntity = new TrianguloAnimado(5, 1.0);
 	  auxMat = auxEntity->getModelMat();
 	  auxMat = translate(auxMat, dvec3(5.0, 15.0, 0.0));
 	  auxEntity->setModelMat(auxMat);
@@ -72,7 +72,35 @@ void Scene::init()
 	  auxMat = auxEntity->getModelMat();
 	  auxMat = translate(auxMat, dvec3(11.0, 21.0, 0.0));
 	  auxEntity->setModelMat(auxMat);
+	  grObjects.push_back(auxEntity);*/
+
+
+	//escena 3D
+
+	  grObjects.push_back(new EjesRGB(5));
+
+	  //rectangulo
+	  auxEntity = new Rectangulo(20, 15);
+	  auxMat = auxEntity->getModelMat();
+	  auxMat = rotate(auxMat, radians(-90.0), dvec3(1.0, 0.0, 0.0));
+	  auxEntity->setModelMat(auxMat);
 	  grObjects.push_back(auxEntity);
+
+	  //Cubo
+	  auxEntity = new Caja(5);
+	  GLdouble auxLado = static_cast<Caja*>(auxEntity)->lado() / 2;
+	  auxMat = auxEntity->getModelMat();
+	  auxMat = translate(auxMat, dvec3(-auxLado, auxLado, -auxLado));
+	  auxEntity->setModelMat(auxMat);
+	  grObjects.push_back(auxEntity);
+
+	  //Estrella 3D
+	  auxEntity = new Estrella3D(2.5, 5, 2.5, 180, 90);
+	  auxMat = auxEntity->getModelMat();
+	  auxMat = translate(auxMat, dvec3(-auxLado, 4 * auxLado, -auxLado));
+	  auxEntity->setModelMat(auxMat);
+	  grObjects.push_back(auxEntity);
+
 }
 //-------------------------------------------------------------------------
 
