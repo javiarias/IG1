@@ -35,7 +35,6 @@ void TrianguloAnimado::update() {
 	dmat4 auxMat;
 	auxMat = rotate(dmat4(1), radians(anguloGiro), dvec3(0.0, 0.0, 1.0));
 	auxMat = auxMat * originalMat;
-	auxMat = rotate(auxMat, radians(anguloGiro), dvec3(0.0, 0.0, 1.0));
 
 	setModelMat(auxMat);
 }

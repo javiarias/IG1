@@ -19,35 +19,40 @@ Estrella3D::~Estrella3D()
 void Estrella3D::render(Camera const& cam)
 {
 	if (mesh != nullptr) {
+
+	//rotación
+		dmat4 originalMat = getModelMat();
+
+		dmat4 auxMat = rotate(getModelMat(), radians(anguloY), dvec3(0.0, 1.0, 0.0));
+		auxMat = rotate(auxMat, radians(anguloZ), dvec3(0.0, 0.0, 1.0));
+
+		setModelMat(auxMat);
+
+
 		uploadMvM(cam.getViewMat());
 		glLineWidth(2);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glColor3d(0.1, 1.0, 0.568);
 		mesh->render();
 
-		dmat4 originalMat = this->getModelMat();
-		
-		dmat4 auxMat;
-		auxMat = rotate(originalMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
 
-		this->setModelMat(auxMat);
+		auxMat = rotate(auxMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
+
+		setModelMat(auxMat);
 
 		uploadMvM(cam.getViewMat());
 		mesh->render();
 
-		this->setModelMat(originalMat);
+	//reinicio de matriz
+		setModelMat(originalMat);
 
 		glLineWidth(1);
 	}
 }
 
 void Estrella3D::update() {
-	dmat4 originalMat = getModelMat();
 
-	dmat4 auxMat;
-	//auxMat = rotate(dmat4(1), radians(giroZ), dvec3(0.0, 0.0, 1.0));
-	auxMat = rotate(dmat4(1), radians(90.0), dvec3(0.0, 1.0, 0.0));
-	auxMat = auxMat * originalMat;
+	anguloY += giroY;
+	anguloZ += giroZ;
 
-	setModelMat(auxMat);
 }
