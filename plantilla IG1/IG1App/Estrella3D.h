@@ -10,6 +10,6 @@ public:
 	Estrella3D(GLdouble re, GLdouble np, GLdouble h, GLdouble giroY, GLdouble giroZ);
 	~Estrella3D();
 	virtual void render(Camera const& cam);
-	void update();
+	void update(GLuint timeElapsed);
 };
 

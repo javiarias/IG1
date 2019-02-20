@@ -23,7 +23,13 @@ Viewport viewPort(800, 600);
 Camera camera(&viewPort);    
 
 // Graphics objects of the scene
-Scene scene;   
+Scene scene;
+
+//update control
+bool updateCtrl;
+
+//time since last update
+GLuint last_update_tick;
 
 //----------- Callbacks ----------------------------------------------------
 
@@ -31,6 +37,7 @@ void display();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
+void update();
 
 //-------------------------------------------------------------------------
 
@@ -53,12 +60,16 @@ int main(int argc, char *argv[])
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth buffer and stencil buffer   
   
   int win = glutCreateWindow("IG1App");  // window's identifier
+
+  updateCtrl = false;
+  last_update_tick = 0;
   
   // Callback registration
   glutReshapeFunc(resize);
   glutKeyboardFunc(key);
   glutSpecialFunc(specialKey);
   glutDisplayFunc(display);
+  glutIdleFunc(update);
  
   cout << glGetString(GL_VERSION) << '\n';
   cout << glGetString(GL_VENDOR) << '\n';
@@ -73,6 +84,21 @@ int main(int argc, char *argv[])
   glutDestroyWindow(win);  // Destroy the context 
  
   return 0;
+}
+//-------------------------------------------------------------------------
+
+void update() {
+
+	GLuint timeElapsed = glutGet(GLUT_ELAPSED_TIME) - last_update_tick;
+	if (timeElapsed >= 16) {
+
+		if (updateCtrl) {
+			scene.update(timeElapsed);
+			last_update_tick = glutGet(GLUT_ELAPSED_TIME);
+		}
+
+		glutPostRedisplay(); //así se recarga la pantalla automáticamente
+	}
 }
 //-------------------------------------------------------------------------
 
@@ -117,7 +143,11 @@ void key(unsigned char key, int x, int y)
 	camera.set2D();
 	break;
   case 'u':
-	  scene.update();
+	  updateCtrl = !updateCtrl;
+	  last_update_tick = glutGet(GLUT_ELAPSED_TIME);
+	  break;
+  case 'c':
+	  scene.changeSceneMode();
 	  break;
   default:
 	need_redisplay = false;

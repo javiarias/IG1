@@ -10,6 +10,6 @@ public:
 	~TrianguloAnimado();
 	virtual void render(Camera const& cam);
 
-	void update();
+	void update(GLuint timeElapsed);
 };
 

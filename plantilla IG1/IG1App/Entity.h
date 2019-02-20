@@ -17,7 +17,7 @@ public:
 	virtual ~Entity() { };
 
 	virtual void render(Camera const& cam) = 0;
-	virtual void update() {}
+	virtual void update(GLuint timeElapsed) {}
 
 	// modeling matrix
 	glm::dmat4 const& getModelMat() const { return modelMat; };

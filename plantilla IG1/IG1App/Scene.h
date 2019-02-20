@@ -29,11 +29,19 @@ public:
 
     void render(Camera const& cam);
 
-	void update();
+	void update(GLuint timeElapsed);
+
+	void changeSceneMode();
 	  
 protected:
 
 	  std::vector<Entity*> grObjects;  // Entities (graphics objects) of the scene
+
+	  void init2D();
+	  void init3D();
+	  void clearScene();
+
+	  int isSceneIn3D = true;;
 };
 
 //-------------------------------------------------------------------------
