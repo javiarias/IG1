@@ -16,15 +16,23 @@ void Mesh::render()
   if (vertices != nullptr) {
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, 0, vertices);  // number of coordinates per vertex, type of each coordinate, stride, pointer 
+
     if (colors != nullptr) {
       glEnableClientState(GL_COLOR_ARRAY);
       glColorPointer(4, GL_DOUBLE, 0, colors);   // number of coordinates per color, type of each coordinate, stride, pointer 
     }
+
+	if (texCoords != nullptr) {
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_DOUBLE, 0, texCoords);
+	}
 	
     glDrawArrays(primitive, 0, numVertices);   // primitive graphic, first index and number of elements to be rendered
 
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	
   }
 }
 //-------------------------------------------------------------------------
@@ -238,6 +246,47 @@ Mesh* Mesh::generaContCubo(GLdouble l) {
 
 	m->vertices[8] = dvec3(-x, y, z);
 	m->vertices[9] = dvec3(-x, -y, z);
+
+	return m;
+}
+Mesh * Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+{
+	Mesh* m = generaRectangulo(w, h);
+	m->texCoords = new dvec2[m->numVertices];
+
+	m->texCoords[0] = dvec2(0, rh);
+	m->texCoords[1] = dvec2(0, 0);
+	m->texCoords[2] = dvec2(rw, rh);
+	m->texCoords[3] = dvec2(rw, 0);
+
+
+	return m;
+}
+Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
+{
+	Mesh* m = generaEstrella3D(re, np, h);
+	m->texCoords = new dvec2[m->numVertices];
+
+	m->texCoords[0] = dvec2(0, 0);
+
+	GLdouble angleIncrement = 360 / (2 * np);
+
+	for (int i = 0; i < 2 * np + 1; i++) {
+		GLdouble x = 0, y = 0;
+
+		if (i % 2 != 0) {
+			x = cos(radians(angleIncrement * -i)) * re;
+			y = sin(radians(angleIncrement * -i)) * re;
+		}
+
+		else {
+			x = cos(radians(angleIncrement * -i)) * (re / 2);
+			y = sin(radians(angleIncrement * -i)) * (re / 2);
+		}
+
+
+		m->vertices[i + 1] = dvec2(x, y);
+	}
 
 	return m;
 }

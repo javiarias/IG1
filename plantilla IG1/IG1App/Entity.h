@@ -7,13 +7,15 @@
 
 #include "Camera.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 //-------------------------------------------------------------------------
 
 class Entity 
 {
 public:
-	Entity() : modelMat(1.0) { }; 
+	Entity() : modelMat(1.0) { };
+	Entity(string file) : modelMat(1.0) { texture.load(file); };
 	virtual ~Entity() { };
 
 	virtual void render(Camera const& cam) = 0;
@@ -28,6 +30,8 @@ protected:
 
 	Mesh* mesh = nullptr;   // surface mesh
 	glm::dmat4 modelMat;    // modeling matrix
+
+	Texture texture;
 
 	// transfers modelViewMat to the GPU
 	virtual void uploadMvM(glm::dmat4 const& modelViewMat) const;

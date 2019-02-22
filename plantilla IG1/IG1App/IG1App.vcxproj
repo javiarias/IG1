@@ -130,6 +130,7 @@
     <ClInclude Include="Poliespiral.h" />
     <ClInclude Include="Rectangulo.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TrianguloAnimado.h" />
     <ClInclude Include="TrianguloRGB.h" />
     <ClInclude Include="Viewport.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Poliespiral.cpp" />
     <ClCompile Include="Rectangulo.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TrianguloAnimado.cpp" />
     <ClCompile Include="TrianguloRGB.cpp" />
     <ClCompile Include="Viewport.cpp" />

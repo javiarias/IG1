@@ -11,6 +11,7 @@ void Scene::init()
 { // OpenGL basic setting
 	  glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
 	  glEnable(GL_DEPTH_TEST);  // enable Depth test
+	  glEnable(GL_TEXTURE_2D);
 
 	  init3D();
 
@@ -127,6 +128,7 @@ void Scene::init3D()
 	GLdouble auxLado = static_cast<Caja*>(auxEntity)->lado() / 2;
 	auxMat = auxEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(-auxLado, auxLado, -auxLado));
+	auxMat = translate(auxMat, dvec3(0.0, 0.001, 0.0));
 	auxEntity->setModelMat(auxMat);
 	grObjects.push_back(auxEntity);
 

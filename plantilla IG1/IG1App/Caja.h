@@ -6,6 +6,7 @@ class Caja :
 private:
 
 	GLdouble l = 0;
+	Mesh* bottom = nullptr;
 
 public:
 	Caja(GLdouble l);

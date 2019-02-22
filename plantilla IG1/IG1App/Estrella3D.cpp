@@ -4,10 +4,12 @@
 
 using namespace glm;
 
-Estrella3D::Estrella3D(GLdouble re, GLdouble np, GLdouble h, GLdouble giroY, GLdouble giroZ) : Entity(), giroY(giroY), giroZ(giroZ)
+Estrella3D::Estrella3D(GLdouble re, GLdouble np, GLdouble h, GLdouble giroY, GLdouble giroZ, string file) : Entity(), giroY(giroY), giroZ(giroZ)
 {
 
 	mesh = Mesh::generaEstrella3D(re, np, h);
+	texture.load(file);
+
 }
 
 
@@ -29,10 +31,10 @@ void Estrella3D::render(Camera const& cam)
 		setModelMat(auxMat);
 
 
-		uploadMvM(cam.getViewMat());
+		texture.bind();
+
 		glLineWidth(2);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glColor3d(0.1, 1.0, 0.568);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		mesh->render();
 
 
@@ -47,6 +49,8 @@ void Estrella3D::render(Camera const& cam)
 		setModelMat(originalMat);
 
 		glLineWidth(1);
+
+		texture.unbind();
 	}
 }
 
