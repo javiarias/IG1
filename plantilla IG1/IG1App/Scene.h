@@ -41,7 +41,7 @@ protected:
 	  void init3D();
 	  void clearScene();
 
-	  int isSceneIn3D = true;;
+	  bool isSceneIn3D = true;
 };
 
 //-------------------------------------------------------------------------

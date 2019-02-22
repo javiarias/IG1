@@ -31,6 +31,9 @@ bool updateCtrl;
 //time since last update
 GLuint last_update_tick;
 
+//FPS
+int framesPerSecond = 60;
+
 //----------- Callbacks ----------------------------------------------------
 
 void display();
@@ -90,7 +93,7 @@ int main(int argc, char *argv[])
 void update() {
 
 	GLuint timeElapsed = glutGet(GLUT_ELAPSED_TIME) - last_update_tick;
-	if (timeElapsed >= 16) {
+	if (timeElapsed >= (1000 / framesPerSecond)) {
 
 		if (updateCtrl) {
 			scene.update(timeElapsed);
