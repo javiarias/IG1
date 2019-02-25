@@ -133,7 +133,7 @@ void Scene::init3D()
 	grObjects.push_back(auxEntity);
 
 	//Estrella 3D
-	auxEntity = new Estrella3D(2.5, 5, 2.5, 4, 9);
+	auxEntity = new Estrella3D(2.5, 4, 2.5, 4, 9);
 	auxMat = auxEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(-auxLado, 4 * auxLado, -auxLado));
 	auxEntity->setModelMat(auxMat);

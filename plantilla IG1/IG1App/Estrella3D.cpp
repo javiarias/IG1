@@ -7,7 +7,7 @@ using namespace glm;
 Estrella3D::Estrella3D(GLdouble re, GLdouble np, GLdouble h, GLdouble giroY, GLdouble giroZ, string file) : Entity(), giroY(giroY), giroZ(giroZ)
 {
 
-	mesh = Mesh::generaEstrella3D(re, np, h);
+	mesh = Mesh::generaEstrellaTexCor(re, np, h);
 	texture.load(file);
 
 }
@@ -33,14 +33,17 @@ void Estrella3D::render(Camera const& cam)
 
 		texture.bind();
 
+		uploadMvM(cam.getViewMat());
 		glLineWidth(2);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		mesh->render();
 
+		texture.unbind();
 
 		auxMat = rotate(auxMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
-
 		setModelMat(auxMat);
+
+		texture.bind();
 
 		uploadMvM(cam.getViewMat());
 		mesh->render();

@@ -259,7 +259,6 @@ Mesh * Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh
 	m->texCoords[2] = dvec2(rw, rh);
 	m->texCoords[3] = dvec2(rw, 0);
 
-
 	return m;
 }
 Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
@@ -275,17 +274,17 @@ Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
 		GLdouble x = 0, y = 0;
 
 		if (i % 2 != 0) {
-			x = cos(radians(angleIncrement * -i)) * re;
-			y = sin(radians(angleIncrement * -i)) * re;
+			x = cos(radians(angleIncrement * -i));
+			y = sin(radians(angleIncrement * -i));
 		}
 
 		else {
-			x = cos(radians(angleIncrement * -i)) * (re / 2);
-			y = sin(radians(angleIncrement * -i)) * (re / 2);
+			x = cos(radians(angleIncrement * -i));
+			y = sin(radians(angleIncrement * -i));
 		}
 
 
-		m->vertices[i + 1] = dvec2(x, y);
+		m->texCoords[i + 1] = dvec2(x, y);
 	}
 
 	return m;
