@@ -3,11 +3,13 @@
 
 using namespace glm;
 
-Caja::Caja(GLdouble l) : Entity(), l(l)
+Caja::Caja(GLdouble l, string boxTex, string bottomTex) : Entity(), l(l)
 {
-	mesh = Mesh::generaContCubo(l);
+	mesh = Mesh::generaCajaTexCor(l);
+	texture.load(boxTex);
 
-	bottom = Mesh::generaRectangulo(l, l);
+	bottom = Mesh::generaRectanguloTexCor(l, l, 1, 1);
+	bottomTexture.load(bottomTex);
 }
 
 
@@ -22,23 +24,38 @@ void Caja::render(Camera const& cam)
 		dmat4 originalMat = getModelMat();
 
 		uploadMvM(cam.getViewMat());
-		glLineWidth(2);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glColor3d(0.1, 1.0, 0.568);
+		texture.bind();
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+
 		mesh->render();
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		texture.unbind();
+		glDisable(GL_CULL_FACE);
+
+		uploadMvM(cam.getViewMat());
+		bottomTexture.bind();
+
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+
+		mesh->render();
+
+		bottomTexture.unbind();
+		glDisable(GL_CULL_FACE);
 
 		dmat4 auxMat = getModelMat();
-		
 		auxMat = translate(auxMat, dvec3(0.0, -l / 2, 0.0));
-
 		auxMat = rotate(auxMat, radians(90.0), dvec3(1.0, 0.0, 0.0));
-
 		setModelMat(auxMat);
 
 		uploadMvM(cam.getViewMat());
+		bottomTexture.bind();
+
 		bottom->render();
+
+		bottomTexture.unbind();
 
 		setModelMat(originalMat);
 

@@ -289,4 +289,29 @@ Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
 
 	return m;
 }
+
+Mesh * Mesh::generaCajaTexCor(GLdouble l)
+{
+	Mesh* m = generaContCubo(l);
+	m->texCoords = new dvec2[m->numVertices];
+
+	GLdouble x = 1, y = 1;
+
+	m->texCoords[0] = dvec2(0, y);
+	m->texCoords[1] = dvec2(0, 0);
+
+	m->texCoords[2] = dvec2(x, y);
+	m->texCoords[3] = dvec2(x, 0);
+
+	m->texCoords[4] = dvec2(0, y);
+	m->texCoords[5] = dvec2(0, 0);
+
+	m->texCoords[6] = dvec2(x, y);
+	m->texCoords[7] = dvec2(x, 0);
+
+	m->texCoords[8] = dvec2(0, y);
+	m->texCoords[9] = dvec2(0, 0);
+
+	return m;
+}
 //-------------------------------------------------------------------------
