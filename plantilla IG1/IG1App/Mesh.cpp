@@ -266,7 +266,7 @@ Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
 	Mesh* m = generaEstrella3D(re, np, h);
 	m->texCoords = new dvec2[m->numVertices];
 
-	m->texCoords[0] = dvec2(0, 0);
+	m->texCoords[0] = dvec2(0.5, 0.5);
 
 	GLdouble angleIncrement = 360 / (2 * np);
 
@@ -274,13 +274,13 @@ Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
 		GLdouble x = 0, y = 0;
 
 		if (i % 2 != 0) {
-			x = cos(radians(angleIncrement * -i));
-			y = sin(radians(angleIncrement * -i));
+			x = cos(radians(angleIncrement * -i)) * 0.5 + 0.5;
+			y = sin(radians(angleIncrement * -i)) * 0.5 + 0.5;
 		}
 
 		else {
-			x = cos(radians(angleIncrement * -i));
-			y = sin(radians(angleIncrement * -i));
+			x = cos(radians(angleIncrement * -i)) * 0.25 + 0.5;
+			y = sin(radians(angleIncrement * -i)) * 0.25 + 0.5;
 		}
 
 
@@ -295,22 +295,20 @@ Mesh * Mesh::generaCajaTexCor(GLdouble l)
 	Mesh* m = generaContCubo(l);
 	m->texCoords = new dvec2[m->numVertices];
 
-	GLdouble x = 1, y = 1;
-
-	m->texCoords[0] = dvec2(0, y);
+	m->texCoords[0] = dvec2(0, 1);
 	m->texCoords[1] = dvec2(0, 0);
 
-	m->texCoords[2] = dvec2(x, y);
-	m->texCoords[3] = dvec2(x, 0);
+	m->texCoords[2] = dvec2(1, 1);
+	m->texCoords[3] = dvec2(1, 0);
 
-	m->texCoords[4] = dvec2(0, y);
-	m->texCoords[5] = dvec2(0, 0);
+	m->texCoords[4] = dvec2(2, 1);
+	m->texCoords[5] = dvec2(2, 0);
 
-	m->texCoords[6] = dvec2(x, y);
-	m->texCoords[7] = dvec2(x, 0);
+	m->texCoords[6] = dvec2(3, 1);
+	m->texCoords[7] = dvec2(3, 0);
 
-	m->texCoords[8] = dvec2(0, y);
-	m->texCoords[9] = dvec2(0, 0);
+	m->texCoords[8] = dvec2(4, 1);
+	m->texCoords[9] = dvec2(4, 0);
 
 	return m;
 }
