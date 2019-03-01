@@ -149,8 +149,11 @@ void key(unsigned char key, int x, int y)
 	  updateCtrl = !updateCtrl;
 	  last_update_tick = glutGet(GLUT_ELAPSED_TIME);
 	  break;
-  case 'c':
+  case '3':
 	  scene.changeSceneMode();
+	  break;
+  case 'f':
+	  Texture::save("../Bmps/captura.bmp");
 	  break;
   default:
 	need_redisplay = false;

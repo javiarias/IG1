@@ -223,7 +223,7 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h) {
 
 
 
-Mesh* Mesh::generaContCubo(GLdouble l) {
+Mesh* Mesh::generaContCubo(GLdouble l, GLdouble h) {
 	Mesh* m = new Mesh();
 	m->primitive = GL_TRIANGLE_STRIP;
 	m->numVertices = 10;
@@ -231,6 +231,9 @@ Mesh* Mesh::generaContCubo(GLdouble l) {
 	m->vertices = new dvec3[m->numVertices];
 
 	GLdouble x = l / 2, y = l / 2, z = l / 2;
+
+	if (h != 0)
+		y = h / 2;
 
 	m->vertices[0] = dvec3(-x, y, z);
 	m->vertices[1] = dvec3(-x, -y, z);
@@ -290,9 +293,9 @@ Mesh * Mesh::generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h)
 	return m;
 }
 
-Mesh * Mesh::generaCajaTexCor(GLdouble l)
+Mesh * Mesh::generaCajaTexCor(GLdouble l, GLdouble h)
 {
-	Mesh* m = generaContCubo(l);
+	Mesh* m = generaContCubo(l, h);
 	m->texCoords = new dvec2[m->numVertices];
 
 	m->texCoords[0] = dvec2(0, 1);

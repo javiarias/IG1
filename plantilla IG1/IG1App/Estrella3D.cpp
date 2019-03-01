@@ -59,7 +59,7 @@ void Estrella3D::render(Camera const& cam)
 
 void Estrella3D::update(GLuint timeElapsed) {
 
-	anguloY += giroY;
-	anguloZ += giroZ;
+	anguloY += giroY + 0.05 * timeElapsed;
+	anguloZ += giroZ + 0.05 * timeElapsed;
 
 }

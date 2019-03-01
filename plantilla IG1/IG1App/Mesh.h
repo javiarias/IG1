@@ -18,10 +18,10 @@ public:
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h);
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);
 	static Mesh* generaEstrella3D(GLdouble re, GLdouble np, GLdouble h);
-	static Mesh* generaContCubo(GLdouble l);
+	static Mesh* generaContCubo(GLdouble l, GLdouble h = 0);
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 	static Mesh* generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h);
-	static Mesh* generaCajaTexCor(GLdouble l);
+	static Mesh* generaCajaTexCor(GLdouble l, GLdouble h = 0);
  
 	Mesh(void) { };
 	~Mesh(void);

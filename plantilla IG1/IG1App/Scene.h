@@ -15,6 +15,8 @@
 #include "TrianguloAnimado.h"
 #include "Estrella3D.h"
 #include "Caja.h"
+#include "Foto.h"
+#include "Cristalera.h"
 
 #include <vector>
 
@@ -41,7 +43,7 @@ protected:
 	  void init3D();
 	  void clearScene();
 
-	  bool isSceneIn3D = true;
+	  bool isSceneIn3D = false;
 };
 
 //-------------------------------------------------------------------------

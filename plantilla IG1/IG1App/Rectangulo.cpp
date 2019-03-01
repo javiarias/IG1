@@ -13,8 +13,6 @@ Rectangulo::Rectangulo(GLdouble w, GLdouble h, string file)
 
 	mesh = Mesh::generaRectanguloTexCor(w, h, rw, (int)(rw * aspectRatio));
 	texture.load(file);
-
-	foto = Mesh::generaRectanguloTexCor(w / 3, h / 3, 1, 1);
 }
 
 
@@ -36,24 +34,8 @@ void Rectangulo::render(Camera const& cam)
 		mesh->render();
 		texture.unbind();
 
-		dmat4 auxMat = getModelMat();
-		auxMat = translate(auxMat, dvec3(0.0, 0.0, 0.01));
-		setModelMat(auxMat);
-
-		uploadMvM(cam.getViewMat());
-		fotoTex.bind();
-		foto->render();
-
 		glLineWidth(1);
-
-		fotoTex.unbind();
 
 		setModelMat(originalMat);
 	}
-}
-
-void Rectangulo::update(GLuint timeElapsed) {
-
-	fotoTex.loadColorBuffer();
-
 }

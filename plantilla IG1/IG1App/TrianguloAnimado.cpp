@@ -33,9 +33,9 @@ void TrianguloAnimado::update(GLuint timeElapsed) {
 	dmat4 originalMat = getModelMat();
 
 	dmat4 auxMat;
-	auxMat = rotate(dmat4(1), radians(anguloGiro), dvec3(0.0, 0.0, 1.0));
+	auxMat = rotate(dmat4(1), radians(anguloGiro + 0.05 * timeElapsed), dvec3(0.0, 0.0, 1.0));
 	auxMat = auxMat * originalMat;
-	auxMat = rotate(auxMat, radians(anguloGiro), dvec3(0.0, 0.0, 1.0));
+	auxMat = rotate(auxMat, radians(anguloGiro + 0.05 * timeElapsed), dvec3(0.0, 0.0, 1.0));
 
 	setModelMat(auxMat);
 }
