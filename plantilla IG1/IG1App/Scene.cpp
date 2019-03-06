@@ -155,12 +155,20 @@ void Scene::init3D()
 	//OBJETOS TRANSPARENTES
 	//////////////////////
 
+	//Hierba
+	auxEntity = new Hierba(100, 75, 3);
+	auxMat = auxEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(auxLado, 37.5, auxLado));
+	auxEntity->setModelMat(auxMat);
+	grObjects.push_back(auxEntity);
+
 	//Cristalera
 	auxEntity = new Cristalera(auxLado * 5);
 	auxMat = auxEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(0.0, 5 * auxLado / 4, 0.0));
 	auxEntity->setModelMat(auxMat);
 	grObjects.push_back(auxEntity);
+
 }
 
 void Scene::clearScene()

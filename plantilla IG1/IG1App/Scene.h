@@ -17,6 +17,7 @@
 #include "Caja.h"
 #include "Foto.h"
 #include "Cristalera.h"
+#include "Hierba.h"
 
 #include <vector>
 

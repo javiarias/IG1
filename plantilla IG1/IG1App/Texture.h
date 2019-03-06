@@ -11,6 +11,7 @@ public:
 	Texture() : w(0), h(0), id(0) {};
 	~Texture() { if (id != 0) glDeleteTextures(1, &id); };
 	void load(const std::string & BMP_Name, GLubyte alpha = 255);
+	void load(const std::string & BMP_Name, GLubyte r, GLubyte g, GLubyte b, GLubyte a);
 	// cargar y transferir a GPU
 	void bind(GLint modo = GL_REPLACE); // para mezcla de colores
 	void unbind() { glBindTexture(GL_TEXTURE_2D, 0); };
