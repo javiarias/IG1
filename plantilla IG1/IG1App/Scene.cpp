@@ -14,7 +14,7 @@ void Scene::init()
 	glEnable(GL_DEPTH_TEST);  // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 
-	init2D();
+	init3D();
 
 	glEnable(GL_BLEND);
 }
@@ -116,24 +116,25 @@ void Scene::init3D()
 
 //escena 3D
 
+	GLdouble auxLado = 50;
+
 	grObjects.push_back(new EjesRGB(50));
 
 
-	//Cubo
-	auxEntity = new Caja(50);
-	GLdouble auxLado = dynamic_cast<Caja*>(auxEntity)->lado();
-	auxMat = auxEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(-auxLado, auxLado/2, -auxLado));
-	auxMat = translate(auxMat, dvec3(0.0, 0.005, 0.0));
-	auxEntity->setModelMat(auxMat);
-	grObjects.push_back(auxEntity);
+	////Cubo
+	//auxEntity = new Caja(auxLado);
+	//auxMat = auxEntity->getModelMat();
+	//auxMat = translate(auxMat, dvec3(-auxLado, auxLado/2, -auxLado));
+	//auxMat = translate(auxMat, dvec3(0.0, 0.005, 0.0));
+	//auxEntity->setModelMat(auxMat);
+	//grObjects.push_back(auxEntity);
 
-	//Estrella 3D
-	auxEntity = new Estrella3D(25, 8, 25, 4, 9);
-	auxMat = auxEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(-auxLado, 4 * auxLado/2, -auxLado));
-	auxEntity->setModelMat(auxMat);
-	grObjects.push_back(auxEntity);
+	////Estrella 3D
+	//auxEntity = new Estrella3D(25, 8, 25, 4, 9);
+	//auxMat = auxEntity->getModelMat();
+	//auxMat = translate(auxMat, dvec3(-auxLado, 4 * auxLado/2, -auxLado));
+	//auxEntity->setModelMat(auxMat);
+	//grObjects.push_back(auxEntity);
 
 	//suelo
 	auxEntity = new Rectangulo(auxLado * 5, auxLado * 5);
@@ -142,32 +143,39 @@ void Scene::init3D()
 	auxEntity->setModelMat(auxMat);
 	grObjects.push_back(auxEntity);
 
-	//foto
-	auxEntity = new Foto(auxLado, auxLado*0.75);
+	////foto
+	//auxEntity = new Foto(auxLado, auxLado*0.75);
+	//auxMat = auxEntity->getModelMat();
+	//auxMat = translate(auxMat, dvec3(0.0, 0.01, 0.0));
+	//auxMat = rotate(auxMat, radians(-90.0), dvec3(1.0, 0.0, 0.0));
+	//auxEntity->setModelMat(auxMat);
+	//grObjects.push_back(auxEntity);
+
+	//Hierba
+	/*auxEntity = new Hierba(100, 75, 3);
 	auxMat = auxEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(0.0, 0.01, 0.0));
-	auxMat = rotate(auxMat, radians(-90.0), dvec3(1.0, 0.0, 0.0));
+	auxMat = translate(auxMat, dvec3(auxLado, 37.5, auxLado));
 	auxEntity->setModelMat(auxMat);
-	grObjects.push_back(auxEntity);
+	grObjects.push_back(auxEntity);*/
 
 
 	//////////////////////
 	//OBJETOS TRANSPARENTES
 	//////////////////////
 
-	//Hierba
-	auxEntity = new Hierba(100, 75, 3);
+	//bipiramide
+	auxEntity = new Bipiramide(auxLado, auxLado);
 	auxMat = auxEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(auxLado, 37.5, auxLado));
+	auxMat = translate(auxMat, dvec3(auxLado, auxLado, auxLado));
 	auxEntity->setModelMat(auxMat);
 	grObjects.push_back(auxEntity);
 
 	//Cristalera
-	auxEntity = new Cristalera(auxLado * 5);
+	/*auxEntity = new Cristalera(auxLado * 5);
 	auxMat = auxEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(0.0, 5 * auxLado / 4, 0.0));
 	auxEntity->setModelMat(auxMat);
-	grObjects.push_back(auxEntity);
+	grObjects.push_back(auxEntity);*/
 
 }
 

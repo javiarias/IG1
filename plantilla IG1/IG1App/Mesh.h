@@ -22,6 +22,9 @@ public:
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 	static Mesh* generaEstrellaTexCor(GLdouble re, GLdouble np, GLdouble h);
 	static Mesh* generaCajaTexCor(GLdouble l, GLdouble h = 0);
+	static Mesh* generaPiramide(GLdouble l, GLdouble h);
+	static Mesh* generaPiramideColor(GLdouble l, GLdouble h);
+	static Mesh* generaPiramideTexCor(GLdouble l, GLdouble h);
  
 	Mesh(void) { };
 	~Mesh(void);

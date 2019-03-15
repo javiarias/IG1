@@ -147,6 +147,7 @@ Mesh* Mesh::generaTriangulo(GLdouble r) {
 	}
 	return m;
 }
+
 Mesh* Mesh::generaTrianguloRGB(GLdouble r) {
 	Mesh* m = generaTriangulo(r);
 	m->colors = new dvec4[3];
@@ -314,5 +315,78 @@ Mesh * Mesh::generaCajaTexCor(GLdouble l, GLdouble h)
 	m->texCoords[9] = dvec2(4, 0);
 
 	return m;
+}
+
+Mesh* Mesh::generaPiramide(GLdouble l, GLdouble h)
+{
+	Mesh* m = new Mesh();
+	m->primitive = GL_TRIANGLES;
+	m->numVertices = 12;
+
+	m->vertices = new dvec3[m->numVertices];
+
+	GLdouble x = l / 2, y = h, z = l / 2;
+
+	m->vertices[0] = dvec3(0, y, 0);
+	m->vertices[1] = dvec3(-x, 0, -z);
+	m->vertices[2] = dvec3(x, 0, -z);
+
+	m->vertices[3] = dvec3(0, y, 0);
+	m->vertices[4] = dvec3(x, 0, -z);
+	m->vertices[5] = dvec3(x, 0, z);
+
+	m->vertices[6] = dvec3(0, y, 0);
+	m->vertices[7] = dvec3(x, 0, z);
+	m->vertices[8] = dvec3(-x, 0, z);
+
+	m->vertices[9] = dvec3(0, y, 0);
+	m->vertices[10] = dvec3(-x, 0, z);
+	m->vertices[11] = dvec3(-x, 0, -z);
+
+
+	return m;
+}
+
+Mesh * Mesh::generaPiramideColor(GLdouble l, GLdouble h)
+{
+	Mesh* m = generaPiramide(l, h);
+
+	m->colors = new dvec4[m->numVertices];
+
+	m->colors[0] = dvec4(1.0, 1.0, 0.0, 0.7);
+	m->colors[1] = dvec4(1.0, 0.0, 0.0, 0.7);
+	m->colors[2] = dvec4(1.0, 0.0, 0.0, 0.7);
+
+	m->colors[3] = dvec4(0.0, 1.0, 0.0, 0.7);
+	m->colors[4] = dvec4(0.0, 1.0, 0.0, 0.7);
+	m->colors[5] = dvec4(0.0, 1.0, 0.0, 0.7);
+
+	m->colors[6] = dvec4(0.0, 0.0, 1.0, 0.7);
+	m->colors[7] = dvec4(0.0, 0.0, 1.0, 0.7);
+	m->colors[8] = dvec4(0.0, 0.0, 1.0, 0.7);
+
+	m->colors[9] = dvec4(1.0, 0.0, 1.0, 0.7);
+	m->colors[10] = dvec4(1.0, 0.0, 1.0, 0.7);
+	m->colors[11] = dvec4(1.0, 0.0, 1.0, 0.7);
+
+
+	return m;
+}
+
+Mesh * Mesh::generaPiramideTexCor(GLdouble l, GLdouble h)
+{
+	Mesh* m = generaPiramideColor(l, h);
+
+	m->texCoords = new dvec2[m->numVertices];
+
+
+	for (int i = 0; i < 4; i++) {
+		m->texCoords[0 + i * 3] = dvec2(0.5 + i, 1);
+		m->texCoords[1 + i * 3] = dvec2(0 + i, 0);
+		m->texCoords[2 + i * 3] = dvec2(1 + i, 0);
+	}
+
+
+	return m;;
 }
 //-------------------------------------------------------------------------

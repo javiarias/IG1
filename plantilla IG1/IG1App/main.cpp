@@ -155,6 +155,24 @@ void key(unsigned char key, int x, int y)
   case 'f':
 	  Texture::save("../Bmps/captura.bmp");
 	  break;
+  case 'q':
+	  camera.pitch(-5);
+	  break;
+  case 'a':
+	  camera.yaw(-5);
+	  break;
+  case 'e':
+	  camera.pitch(5);
+	  break;
+  case 'd':
+	  camera.yaw(5);
+	  break;
+  case 'w':
+	  camera.roll(-5);
+	  break;
+  case 's':
+	  camera.roll(5);
+	  break;
   default:
 	need_redisplay = false;
     break;

@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bipiramide.h" />
     <ClInclude Include="Caja.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cristalera.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bipiramide.cpp" />
     <ClCompile Include="Caja.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cristalera.cpp" />

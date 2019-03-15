@@ -18,6 +18,7 @@
 #include "Foto.h"
 #include "Cristalera.h"
 #include "Hierba.h"
+#include "Bipiramide.h"
 
 #include <vector>
 
@@ -44,7 +45,7 @@ protected:
 	  void init3D();
 	  void clearScene();
 
-	  bool isSceneIn3D = false;
+	  bool isSceneIn3D = true;
 };
 
 //-------------------------------------------------------------------------
