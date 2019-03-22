@@ -26,13 +26,18 @@ Camera camera(&viewPort);
 Scene scene;
 
 //update control
-bool updateCtrl;
+bool updateActive;
 
 //time since last update
 GLuint last_update_tick;
 
 //FPS
 int framesPerSecond = 60;
+
+dvec2 mouseCoord;
+GLint mouseButton;
+
+GLdouble mouseSensitivity = 0.1;
 
 //----------- Callbacks ----------------------------------------------------
 
@@ -41,6 +46,9 @@ void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 void update();
+void mouse(int button, int state, int x, int y);
+void motion(int x, int y);
+void mouseWheel(int whellNumber, int direction, int x, int y);
 
 //-------------------------------------------------------------------------
 
@@ -64,7 +72,7 @@ int main(int argc, char *argv[])
   
   int win = glutCreateWindow("IG1App");  // window's identifier
 
-  updateCtrl = false;
+  updateActive = false;
   last_update_tick = 0;
   
   // Callback registration
@@ -73,6 +81,9 @@ int main(int argc, char *argv[])
   glutSpecialFunc(specialKey);
   glutDisplayFunc(display);
   glutIdleFunc(update);
+  glutMouseFunc(mouse);
+  glutMotionFunc(motion);
+  glutMouseWheelFunc(mouseWheel);
  
   cout << glGetString(GL_VERSION) << '\n';
   cout << glGetString(GL_VENDOR) << '\n';
@@ -95,7 +106,7 @@ void update() {
 	GLuint timeElapsed = glutGet(GLUT_ELAPSED_TIME) - last_update_tick;
 	if (timeElapsed >= (1000 / framesPerSecond)) {
 
-		if (updateCtrl) {
+		if (updateActive) {
 			scene.update(timeElapsed);
 			last_update_tick = glutGet(GLUT_ELAPSED_TIME);
 		}
@@ -146,14 +157,35 @@ void key(unsigned char key, int x, int y)
 	camera.set2D();
 	break;
   case 'u':
-	  updateCtrl = !updateCtrl;
+	  updateActive = !updateActive;
 	  last_update_tick = glutGet(GLUT_ELAPSED_TIME);
 	  break;
   case '3':
 	  scene.changeSceneMode();
 	  break;
+  case 'p':
+	  camera.changeProj();
+	  break;
   case 'f':
 	  Texture::save("../Bmps/captura.bmp");
+	  break;
+  case 'a':
+	  camera.moveLR(-5);
+	  break;
+  case 'd':
+	  camera.moveLR(5);
+	  break;
+  case 'w':
+	  camera.moveFB(5);
+	  break;
+  case 's':
+	  camera.moveFB(-5);
+	  break;
+  case 'q':
+	  camera.moveUD(-5);
+	  break;
+  case 'e':
+	  camera.moveUD(5);
 	  break;
   default:
 	need_redisplay = false;
@@ -171,16 +203,16 @@ void specialKey(int key, int x, int y)
 
   switch (key) {
   case GLUT_KEY_RIGHT:
-    camera.pitch(5);   // rotate 1 on the X axis
+    camera.moveLR(5);
     break;
   case GLUT_KEY_LEFT:
-    camera.yaw(5);     // rotate 1 on the Y axis 
+	camera.moveLR(-5);
     break;
   case GLUT_KEY_UP:
-    camera.roll(5);    // rotate 1 on the Z axis
+	  camera.moveFB(5);
     break;
   case GLUT_KEY_DOWN:
-    camera.roll(-5);   // rotate -1 on the Z axis
+	  camera.moveFB(-5);
     break;
   default:
     need_redisplay = false;
@@ -192,3 +224,55 @@ void specialKey(int key, int x, int y)
 }
 //-------------------------------------------------------------------------
 
+void mouse(int button, int state, int x, int y) {
+	mouseCoord = dvec2(x, y);
+
+	if (state == GLUT_DOWN)
+		mouseButton = button;
+	else
+		mouseButton = -1;
+}
+//-------------------------------------------------------------------------
+
+void motion(int x, int y) {
+
+	dvec2 mp = mouseCoord; // guardar la anterior posición en var. temp.
+	mouseCoord = dvec2(x, y); // Guardamos la posición actual
+	mp = (mouseCoord - mp); // desplazamiento realizado
+
+	if (mouseButton == GLUT_LEFT_BUTTON) {
+		camera.orbit(mp.x * -mouseSensitivity, mp.y * 10 * mouseSensitivity); // sensitivity = 0.05
+																			  // mp.y is multiplied by 10 because, due to how orbit works, the y increment was disproportionate to the x (or angle) increment
+
+		glutPostRedisplay();
+	}
+	else if (mouseButton == GLUT_RIGHT_BUTTON) {
+		camera.moveLR(mp.x * -mouseSensitivity);
+		camera.moveUD(mp.y *  mouseSensitivity);
+
+		glutPostRedisplay();
+	}
+
+}
+//-------------------------------------------------------------------------
+
+void mouseWheel(int n, int d, int x, int y) {
+	int m = glutGetModifiers();	//returns any special key that is pressed (CTRL, ALT, SHIFT)
+
+	if (m == 0) // none of those special keys is pressed
+	{
+		// d is the wheel's direction (+1 / -1)
+		if (d == 1)
+			camera.moveFB(5);
+		else
+			camera.moveFB(-5);
+
+		glutPostRedisplay();
+	}
+	else if (m == GLUT_ACTIVE_CTRL) {
+
+		camera.uploadScale((GLdouble)d / 100);
+
+		glutPostRedisplay();
+	}
+}
