@@ -65,7 +65,7 @@ void Camera::uploadSize(GLdouble aw, GLdouble ah)
 	if (isOrthogonal)
 		projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
 	else
-		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, yTop, farVal);
 
 	uploadPM();
 }
@@ -79,7 +79,7 @@ void Camera::uploadScale(GLdouble s)
 	if(isOrthogonal)
 		projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
 	else
-		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, yTop, farVal);
 
 	uploadPM();
 }
