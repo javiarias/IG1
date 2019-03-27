@@ -68,7 +68,7 @@ protected:
 	dvec3 right, upward, front;	//for the u (right), v (upward) and -n (front) axes, used to calculate the camera's movement
 
 	GLdouble orbitAngle = 0;
-	GLdouble orbitRadius = 1000;
+	GLdouble orbitRadius = 500;
 
 	bool isOrthogonal = true;
 };

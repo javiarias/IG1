@@ -11,6 +11,7 @@ class Viewport
 {  
 public:
 	Viewport(GLsizei aw, GLsizei ah) : width(aw), height(ah) { };
+	Viewport(GLsizei al, GLsizei ab, GLsizei aw, GLsizei ah) : xLeft(al), yBot(ab), width(aw), height(ah) { };
 	~Viewport() { };
 
 	GLsizei getLeft() const { return xLeft; };  // viewport left position
