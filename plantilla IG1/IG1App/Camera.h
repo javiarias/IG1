@@ -52,6 +52,8 @@ public:
 
 	void changeProj();
 
+	void setTopDown();
+
 protected:
 	
 	dmat4 viewMat;    // view matrix = inverse of modeling matrix

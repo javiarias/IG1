@@ -16,11 +16,16 @@ using namespace std;
 
 //---------- Global variables -------------------------------------------------------------
 
+GLint windowWidth = 800;
+GLint windowHeight = 600;
+
 // Viewport position and size
-Viewport viewPort(800, 600);   
+Viewport viewPort(windowWidth, windowHeight);
+Viewport viewPortTD(windowWidth / 2, windowHeight);
 
 // Camera position, view volume and projection
-Camera camera(&viewPort);    
+Camera camera(&viewPort);
+Camera cameraTD(&viewPortTD);
 
 // Graphics objects of the scene
 Scene scene;
@@ -38,6 +43,8 @@ dvec2 mouseCoord;
 GLint mouseButton;
 
 GLdouble mouseSensitivity = 0.1;
+
+bool topDown = false;
 
 //----------- Callbacks ----------------------------------------------------
 
@@ -90,6 +97,7 @@ int main(int argc, char *argv[])
 
   // after creating the context
   camera.set2D();
+  cameraTD.setTopDown();
   scene.init();    
   
   glutMainLoop(); 
@@ -120,7 +128,19 @@ void display()   // double buffering
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
   
-  scene.render(camera);
+  if (!topDown) {
+	  scene.render(camera);
+  }
+  else {
+	  viewPort.uploadSize(windowWidth / 2, windowHeight);
+	  camera.uploadSize(viewPort.getW(), viewPort.getH());
+	  scene.render(camera);
+
+	  viewPortTD.uploadSize(windowWidth / 2, windowHeight);
+	  viewPortTD.uploadPos(windowWidth / 2, 0);
+	  cameraTD.uploadSize(viewPortTD.getW(), viewPortTD.getH());
+	  scene.render(cameraTD);
+  }
     
   glutSwapBuffers();  
 }
@@ -128,11 +148,24 @@ void display()   // double buffering
 
 void resize(int newWidth, int newHeight)
 {
-  // Resize Viewport 
-  viewPort.uploadSize(newWidth, newHeight);  
-  
-  // Resize Scene Visible Area 
-  camera.uploadSize(viewPort.getW(), viewPort.getH());    // scale unchanged
+	windowWidth = newWidth;
+	windowHeight = newHeight;
+
+	if (!topDown) {
+		// Resize Viewport 
+		viewPort.uploadSize(newWidth, newHeight);
+
+		// Resize Scene Visible Area 
+		camera.uploadSize(viewPort.getW(), viewPort.getH());    // scale unchanged
+	}
+	else {
+		viewPort.uploadSize(newWidth / 2, newHeight);
+		camera.uploadSize(viewPort.getW() / 2, viewPort.getH());
+
+		viewPortTD.uploadSize(newWidth / 2, newHeight);
+		viewPortTD.uploadPos(newWidth / 2, 0);
+		cameraTD.uploadSize(viewPortTD.getW() / 2, viewPortTD.getH());
+	}
 }
 //-------------------------------------------------------------------------
 
@@ -165,6 +198,7 @@ void key(unsigned char key, int x, int y)
 	  break;
   case 'p':
 	  camera.changeProj();
+	  cameraTD.changeProj();
 	  break;
   case 'f':
 	  Texture::save("../Bmps/captura.bmp");
@@ -187,10 +221,18 @@ void key(unsigned char key, int x, int y)
   case 'e':
 	  camera.moveUD(5);
 	  break;
+  case 'c':
+	  topDown = !topDown;
   default:
 	need_redisplay = false;
     break;
   } //switch
+
+  if (!topDown) {
+	  viewPort.uploadSize(windowWidth, windowHeight);
+
+	  camera.uploadSize(viewPort.getW(), viewPort.getH());
+  }
 
   if (need_redisplay)
     glutPostRedisplay();

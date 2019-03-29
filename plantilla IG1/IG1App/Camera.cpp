@@ -12,10 +12,11 @@ void Camera::set2D()
 {
 	orbitAngle = 270;
 
-	eye= dvec3(0, 0, 500);
+	eye = dvec3(0, 0, orbitRadius);
 	look= dvec3(0, 0, 0);
 	up= dvec3(0, 1, 0);
-	viewMat = lookAt(eye, look, up);
+
+	setVM();
 }
 //-------------------------------------------------------------------------
 
@@ -23,10 +24,15 @@ void Camera::set3D()
 {
 	orbitAngle = 315;
 
-	eye = dvec3(500, 500, 500);
 	look = dvec3(0, 10, 0);
 	up = dvec3(0, 1, 0);
-	viewMat = lookAt(eye, look, up);
+
+
+	eye = dvec3(orbitRadius, orbitRadius, orbitRadius);
+	eye.x = look.x + cos(radians(orbitAngle)) * orbitRadius;
+	eye.z = look.z - sin(radians(orbitAngle)) * orbitRadius;
+
+	setVM();
 }
 //-------------------------------------------------------------------------
 
@@ -143,5 +149,19 @@ void Camera::changeProj()
 		projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
 
 	else
-		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+		projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, yTop, farVal);
+
+
+	uploadPM();
+}
+
+void Camera::setTopDown()
+{
+	eye = dvec3(0, orbitRadius, 0);
+	look = dvec3(0, 0, 0);
+	up = dvec3(0, 0, -1);
+
+	uploadScale(0.5);
+
+	setVM();
 }
