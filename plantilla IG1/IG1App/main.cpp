@@ -17,14 +17,10 @@ using namespace std;
 //---------- Global variables -------------------------------------------------------------
 
 // Viewport position and size
-Viewport viewPortOriginal(800, 600);
-
-Viewport viewPort1(0, 0, viewPortOriginal.getW() / 2, 600);
-Viewport viewPort2(400, 0, viewPortOriginal.getW() / 2, 600);
+Viewport viewPort(800, 600);   
 
 // Camera position, view volume and projection
-Camera camera(&viewPort1);
-Camera cameraTopDown(&viewPort2);
+Camera camera(&viewPort);    
 
 // Graphics objects of the scene
 Scene scene;
@@ -99,7 +95,7 @@ int main(int argc, char *argv[])
   glutMainLoop(); 
     
   //cin.ignore(INT_MAX, '\n');  cin.get();  
-  glutDestroyWindow(win);  // Destroy the context
+  glutDestroyWindow(win);  // Destroy the context 
  
   return 0;
 }
@@ -122,29 +118,21 @@ void update() {
 
 void display()   // double buffering
 {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
   
-  if (true) {
-	  scene.render(camera);
-
-	  scene.render(cameraTopDown);
-  }
+  scene.render(camera);
     
-  glutSwapBuffers();
+  glutSwapBuffers();  
 }
 //-------------------------------------------------------------------------
 
 void resize(int newWidth, int newHeight)
 {
   // Resize Viewport 
-	viewPortOriginal.uploadSize(newWidth, newHeight);
-	viewPort1.uploadSize(newWidth / 2, newHeight);
-	viewPort2.uploadSize(newWidth / 2, newHeight);
+  viewPort.uploadSize(newWidth, newHeight);  
   
   // Resize Scene Visible Area 
-  camera.uploadSize(viewPort1.getW(), viewPort1.getH());    // scale unchanged
-
-  cameraTopDown.uploadSize(viewPort2.getW(), viewPort2.getH());    // scale unchanged
+  camera.uploadSize(viewPort.getW(), viewPort.getH());    // scale unchanged
 }
 //-------------------------------------------------------------------------
 
