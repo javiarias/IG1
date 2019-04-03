@@ -18,6 +18,7 @@
 #include "Foto.h"
 #include "Cristalera.h"
 #include "Hierba.h"
+#include "Esfera.h"
 
 #include <vector>
 

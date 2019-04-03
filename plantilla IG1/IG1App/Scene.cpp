@@ -14,7 +14,7 @@ void Scene::init()
 	glEnable(GL_DEPTH_TEST);  // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 
-	init2D();
+	initQuadricScene();
 
 	glEnable(GL_BLEND);
 }
@@ -173,19 +173,8 @@ void Scene::init3D()
 
 void Scene::initQuadricScene()
 {
-	GLUquadricObj *qObj;
-
-
-	//Opciones de renderizado
-	gluQuadricDrawStyle(qObj, GLU_FILL);
-	gluQuadricNormals(qObj, GLU_SMOOTH);
-	gluQuadricOrientation(qObj,GLU_OUTSIDE);
-	gluQuadricTexture(qObj,GL_FALSE); 
-
-
-	//Primer objeto
-	qObj = gluNewQuadric();
-	
+	grObjects.push_back(new EjesRGB(50));
+	grObjects.push_back(new Esfera(50));
 }
 
 void Scene::clearScene()
