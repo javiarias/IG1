@@ -42,6 +42,7 @@ protected:
 
 	  void init2D();
 	  void init3D();
+	  void initQuadricScene();
 	  void clearScene();
 
 	  bool isSceneIn3D = false;

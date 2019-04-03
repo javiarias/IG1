@@ -171,6 +171,23 @@ void Scene::init3D()
 
 }
 
+void Scene::initQuadricScene()
+{
+	GLUquadricObj *qObj;
+
+
+	//Opciones de renderizado
+	gluQuadricDrawStyle(qObj, GLU_FILL);
+	gluQuadricNormals(qObj, GLU_SMOOTH);
+	gluQuadricOrientation(qObj,GLU_OUTSIDE);
+	gluQuadricTexture(qObj,GL_FALSE); 
+
+
+	//Primer objeto
+	qObj = gluNewQuadric();
+	
+}
+
 void Scene::clearScene()
 {
 	grObjects.clear();
