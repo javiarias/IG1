@@ -126,6 +126,7 @@
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityMaterial.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Estrella3D.h" />
     <ClInclude Include="Foto.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityMaterial.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Estrella3D.cpp" />
     <ClCompile Include="Foto.cpp" />
