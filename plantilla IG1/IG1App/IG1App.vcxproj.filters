@@ -69,7 +69,7 @@
     <ClInclude Include="EntityMaterial.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Esfera.h">
+    <ClInclude Include="Sphere.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,7 +131,7 @@
     <ClCompile Include="EntityMaterial.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Esfera.cpp">
+    <ClCompile Include="Sphere.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

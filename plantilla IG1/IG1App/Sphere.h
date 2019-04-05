@@ -1,13 +1,14 @@
 #pragma once
 #include "EntityMaterial.h"
-class Esfera :
+class Sphere :
 	public EntityMaterial
 {
 protected:
 	GLUquadricObj *qObj;
+  GLuint r;
 public:
-	Esfera(GLuint radio);
-	~Esfera();
+	Sphere(GLuint radius);
+	~Sphere();
 	void render(Camera const& cam);
 };
 

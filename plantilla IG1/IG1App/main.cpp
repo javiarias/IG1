@@ -193,9 +193,9 @@ void key(unsigned char key, int x, int y)
 	  updateActive = !updateActive;
 	  last_update_tick = glutGet(GLUT_ELAPSED_TIME);
 	  break;
-  case '3':
-	  scene.changeSceneMode();
-	  break;
+  //case '3':
+	 // scene.changeSceneMode();
+	 // break;
   case 'p':
 	  camera.changeProj();
 	  cameraTD.changeProj();

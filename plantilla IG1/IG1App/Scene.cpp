@@ -10,13 +10,17 @@ using namespace glm;
 void Scene::init()
 { // OpenGL basic settin
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH );
-	glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
+	glClearColor(0, 0, 0.05, 1.0);  // background color (alpha=1 -> opaque)
 	glEnable(GL_DEPTH_TEST);  // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 
-	initQuadricScene();
+  for (int i = 0; i < TexturePaths.size(); i++) {
+    Texture* t = new Texture();
+    t->load("../Bmps/" + TexturePaths[i].second);
+    textures.push_back(t);
+  }
 
-	glEnable(GL_BLEND);
+	initQuad();
 }
 //-------------------------------------------------------------------------
 
@@ -26,6 +30,10 @@ Scene::~Scene()
   for (Entity* el: grObjects)
   {
 	  delete el;  el = nullptr;
+  }
+
+  for (Texture* t : textures) {
+    delete t;   t = nullptr;
   }
 }
 //-------------------------------------------------------------------------
@@ -171,10 +179,43 @@ void Scene::init3D()
 
 }
 
-void Scene::initQuadricScene()
+void Scene::initQuad()
 {
-	grObjects.push_back(new EjesRGB(50));
-	grObjects.push_back(new Esfera(50));
+  EntityMaterial* auxMatEntity;
+  dmat4 auxMat;
+
+  GLint baseRadius = 50;
+
+  grObjects.push_back(new EjesRGB(100));
+
+  auxMatEntity = new Sphere(baseRadius);
+  auxMatEntity->setTexture(textures[Sun]);
+  auxMat = auxMatEntity->getModelMat();
+  auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
+  auxMatEntity->setModelMat(auxMat);
+  grObjects.push_back(auxMatEntity);
+
+  auxMatEntity = new Sphere(baseRadius / 2);
+  auxMatEntity->setTexture(textures[Mars]);
+  auxMat = auxMatEntity->getModelMat();
+  auxMat = translate(auxMat, dvec3(baseRadius / 4, baseRadius * 1.6, -baseRadius * 1.5));
+  auxMatEntity->setModelMat(auxMat);
+  grObjects.push_back(auxMatEntity);
+
+  auxMatEntity = new Sphere(baseRadius / 3);
+  auxMatEntity->setTexture(textures[Moon]);
+  auxMat = auxMatEntity->getModelMat();
+  auxMat = translate(auxMat, dvec3(-baseRadius / 2.5, baseRadius * 0.8, -baseRadius / 3));
+  auxMatEntity->setModelMat(auxMat);
+  grObjects.push_back(auxMatEntity);
+
+  auxMatEntity = new Sphere(baseRadius * 5);
+  auxMatEntity->setTexture(textures[Earth]);
+  auxMat = auxMatEntity->getModelMat();
+  auxMat = translate(auxMat, dvec3(0, -baseRadius * 5, 0));
+  auxMatEntity->setModelMat(auxMat);
+  grObjects.push_back(auxMatEntity);
+
 }
 
 void Scene::clearScene()

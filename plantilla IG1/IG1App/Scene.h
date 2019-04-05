@@ -18,7 +18,7 @@
 #include "Foto.h"
 #include "Cristalera.h"
 #include "Hierba.h"
-#include "Esfera.h"
+#include "Sphere.h"
 
 #include <vector>
 
@@ -36,14 +36,37 @@ public:
 	void update(GLuint timeElapsed);
 
 	void changeSceneMode();
+
+  enum TextureEnum {
+    Sun,
+    Moon,
+    Mars,
+    Earth,
+    Desert,
+    Red,
+    Terrain,
+    TerrainG
+  };
+
+  std::vector<pair<int, string>> TexturePaths{
+    {Sun, "sun.bmp"},
+    {Moon, "moon.bmp"},
+    {Mars, "mars.bmp"},
+    {Earth, "earth.bmp"},
+    {Desert, "desierto.bmp"},
+    {Red, "BarrenReds.bmp"},
+    {Terrain, "terreno.bmp"},
+    {TerrainG, "terrenoG.bmp"}
+  };
 	  
 protected:
 
 	  std::vector<Entity*> grObjects;  // Entities (graphics objects) of the scene
+    std::vector<Texture*> textures;
 
 	  void init2D();
 	  void init3D();
-	  void initQuadricScene();
+	  void initQuad();
 	  void clearScene();
 
 	  bool isSceneIn3D = false;
