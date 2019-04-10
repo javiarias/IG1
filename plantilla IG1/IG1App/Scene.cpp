@@ -14,11 +14,27 @@ void Scene::init()
 	glEnable(GL_DEPTH_TEST);  // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 
-  for (int i = 0; i < TexturePaths.size(); i++) {
-    Texture* t = new Texture();
-    t->load("../Bmps/" + TexturePaths[i].second);
-    textures.push_back(t);
-  }
+	for (int i = 0; i < TexturePaths.size(); i++) {
+		Texture* t = new Texture();
+		t->load("../Bmps/" + TexturePaths[i].second);
+		textures.push_back(t);
+	}
+	
+	for (int i = 0; i < END; i++) {
+		Material* mat = new Material();
+		switch (i) {
+			case Copper:
+				mat->setCopper();
+				break;
+			case Chrome:
+				mat->setGoggle();
+				break;
+			case Pewter:
+				mat->setPewter();
+				break;
+		}
+		mats.push_back(mat);
+	}
 
 	initQuad();
 }
@@ -181,40 +197,44 @@ void Scene::init3D()
 
 void Scene::initQuad()
 {
-  EntityMaterial* auxMatEntity;
-  dmat4 auxMat;
+	EntityMaterial* auxMatEntity;
+	dmat4 auxMat;
 
-  GLint baseRadius = 50;
+	GLint baseRadius = 50;
 
-  grObjects.push_back(new EjesRGB(100));
+	grObjects.push_back(new EjesRGB(100));
 
-  auxMatEntity = new Sphere(baseRadius);
-  auxMatEntity->setTexture(textures[Sun]);
-  auxMat = auxMatEntity->getModelMat();
-  auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
-  auxMatEntity->setModelMat(auxMat);
-  grObjects.push_back(auxMatEntity);
+	auxMatEntity = new Sphere(baseRadius);
+	auxMatEntity->setTexture(textures[Sun]);
+	auxMatEntity->setMaterial(mats[Copper]);
+	auxMat = auxMatEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
+	auxMatEntity->setModelMat(auxMat);
+	grObjects.push_back(auxMatEntity);
 
-  auxMatEntity = new Sphere(baseRadius / 2);
-  auxMatEntity->setTexture(textures[Mars]);
-  auxMat = auxMatEntity->getModelMat();
-  auxMat = translate(auxMat, dvec3(baseRadius / 4, baseRadius * 1.6, -baseRadius * 1.5));
-  auxMatEntity->setModelMat(auxMat);
-  grObjects.push_back(auxMatEntity);
+	auxMatEntity = new Sphere(baseRadius / 2);
+	auxMatEntity->setTexture(textures[Mars]);
+	auxMatEntity->setMaterial(mats[Copper]);
+	auxMat = auxMatEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(baseRadius / 4, baseRadius * 1.6, -baseRadius * 1.5));
+	auxMatEntity->setModelMat(auxMat);
+	grObjects.push_back(auxMatEntity);
 
-  auxMatEntity = new Sphere(baseRadius / 3);
-  auxMatEntity->setTexture(textures[Moon]);
-  auxMat = auxMatEntity->getModelMat();
-  auxMat = translate(auxMat, dvec3(-baseRadius / 2.5, baseRadius * 0.8, -baseRadius / 3));
-  auxMatEntity->setModelMat(auxMat);
-  grObjects.push_back(auxMatEntity);
+	auxMatEntity = new Sphere(baseRadius / 3);
+	auxMatEntity->setTexture(textures[Moon]);
+	auxMatEntity->setMaterial(mats[Chrome]);
+	auxMat = auxMatEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(-baseRadius / 2.5, baseRadius * 0.8, -baseRadius / 3));
+	auxMatEntity->setModelMat(auxMat);
+	grObjects.push_back(auxMatEntity);
 
-  auxMatEntity = new Sphere(baseRadius * 5);
-  auxMatEntity->setTexture(textures[Earth]);
-  auxMat = auxMatEntity->getModelMat();
-  auxMat = translate(auxMat, dvec3(0, -baseRadius * 5, 0));
-  auxMatEntity->setModelMat(auxMat);
-  grObjects.push_back(auxMatEntity);
+	auxMatEntity = new Sphere(baseRadius * 5);
+	auxMatEntity->setTexture(textures[Earth]);
+	auxMatEntity->setMaterial(mats[Pewter]);
+	auxMat = auxMatEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(0, -baseRadius * 5, 0));
+	auxMatEntity->setModelMat(auxMat);
+	grObjects.push_back(auxMatEntity);
 
 }
 

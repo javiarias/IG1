@@ -16,3 +16,8 @@ void EntityMaterial::setTexture(Texture * tex)
 {
 	texture = tex;
 }
+
+void EntityMaterial::setMaterial(Material * mat)
+{
+	material = mat;
+}

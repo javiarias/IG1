@@ -123,10 +123,13 @@
     <ClInclude Include="Caja.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cristalera.h" />
+    <ClInclude Include="DirLight.h" />
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityMaterial.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="PosLight.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Estrella3D.h" />
     <ClInclude Include="Foto.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="Poliespiral.h" />
     <ClInclude Include="Rectangulo.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TrianguloAnimado.h" />
     <ClInclude Include="TrianguloRGB.h" />
@@ -145,10 +149,13 @@
     <ClCompile Include="Caja.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cristalera.cpp" />
+    <ClCompile Include="DirLight.cpp" />
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityMaterial.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="PosLight.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Estrella3D.cpp" />
     <ClCompile Include="Foto.cpp" />
@@ -159,6 +166,7 @@
     <ClCompile Include="Poliespiral.cpp" />
     <ClCompile Include="Rectangulo.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TrianguloAnimado.cpp" />
     <ClCompile Include="TrianguloRGB.cpp" />

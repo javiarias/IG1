@@ -37,39 +37,49 @@ public:
 
 	void changeSceneMode();
 
-  enum TextureEnum {
-    Sun,
-    Moon,
-    Mars,
-    Earth,
-    Desert,
-    Red,
-    Terrain,
-    TerrainG
-  };
+	enum TextureEnum {
+		Sun,
+		Moon,
+		Mars,
+		Earth,
+		Desert,
+		Red,
+		Terrain,
+		TerrainG
+	};
 
-  std::vector<pair<int, string>> TexturePaths{
-    {Sun, "sun.bmp"},
-    {Moon, "moon.bmp"},
-    {Mars, "mars.bmp"},
-    {Earth, "earth.bmp"},
-    {Desert, "desierto.bmp"},
-    {Red, "BarrenReds.bmp"},
-    {Terrain, "terreno.bmp"},
-    {TerrainG, "terrenoG.bmp"}
-  };
+	std::vector<pair<int, string>> TexturePaths{
+	{Sun, "sun.bmp"},
+	{Moon, "moon.bmp"},
+	{Mars, "mars.bmp"},
+	{Earth, "earth.bmp"},
+	{Desert, "desierto.bmp"},
+	{Red, "BarrenReds.bmp"},
+	{Terrain, "terreno.bmp"},
+	{TerrainG, "terrenoG.bmp"}
+	};
+	
+	enum MaterialEnum {
+		Copper,
+		Chrome,
+		Pewter,
+
+
+		END
+	};
 	  
 protected:
 
-	  std::vector<Entity*> grObjects;  // Entities (graphics objects) of the scene
-    std::vector<Texture*> textures;
+	std::vector<Entity*> grObjects;  // Entities (graphics objects) of the scene
+	std::vector<Texture*> textures;
+	std::vector<Material*> mats;
 
-	  void init2D();
-	  void init3D();
-	  void initQuad();
-	  void clearScene();
+	void init2D();
+	void init3D();
+	void initQuad();
+	void clearScene();
 
-	  bool isSceneIn3D = false;
+	bool isSceneIn3D = false;
 };
 
 //-------------------------------------------------------------------------
