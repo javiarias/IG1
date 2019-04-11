@@ -13,6 +13,10 @@ void Scene::init()
 	glClearColor(0, 0, 0.05, 1.0);  // background color (alpha=1 -> opaque)
 	glEnable(GL_DEPTH_TEST);  // enable Depth test
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_NORMALIZE);
+
+	glShadeModel(GL_FLAT);
 
 	for (int i = 0; i < TexturePaths.size(); i++) {
 		Texture* t = new Texture();
@@ -35,15 +39,16 @@ void Scene::init()
 		}
 		mats.push_back(mat);
 	}
+
 	dirLight = new DirLight();
-	dirLight->setDir(glm::fvec3(0, -0.25, -1));
+	dirLight->setDir(fvec3(0, 0.25, 1));
 	dirLight->uploadLI();
 	dirLight->enable();
 
 	camLight = new SpotLight();
+	camLight->uploadLI();
+	camLight->enable();
 
-
-	//camLight->setPos(); (Colocar donde esté la cámara)
 	initQuad();
 }
 //-------------------------------------------------------------------------
@@ -65,7 +70,11 @@ Scene::~Scene()
 void Scene::render(Camera const& cam)
 {
 	dirLight->upload(cam.getViewMat());
-	//camLight->upload(cam.getViewMat());
+
+	camLight->setPos(cam.getPos());
+	//camLight->setDir(cam.getLook());
+	camLight->upload(cam.getViewMat());
+
 	for (Entity* el: grObjects)
 	{
 		el->render(cam);
@@ -264,5 +273,15 @@ void Scene::changeSceneMode()
 		init3D();
 	else
 		init2D();
+}
+
+void Scene::toggleDirLight()
+{
+	if (isDirLightOn)
+		dirLight->disable();
+	else
+		dirLight->enable();
+
+	isDirLightOn = !isDirLightOn;
 }
 

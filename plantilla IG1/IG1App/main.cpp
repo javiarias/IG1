@@ -223,6 +223,10 @@ void key(unsigned char key, int x, int y)
 	  break;
   case 'c':
 	  topDown = !topDown;
+	  break;
+  case 'v':
+	  scene.toggleDirLight();
+	  break;
   default:
 	need_redisplay = false;
     break;

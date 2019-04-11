@@ -54,6 +54,9 @@ public:
 
 	void setTopDown();
 
+	dvec3 const& getPos() const { return eye; };
+	dvec3 const& getLook() const { return look; };
+
 protected:
 	
 	dmat4 viewMat;    // view matrix = inverse of modeling matrix

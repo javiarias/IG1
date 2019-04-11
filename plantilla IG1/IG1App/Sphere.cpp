@@ -27,8 +27,7 @@ void Sphere ::render(Camera const& cam)
 
 		uploadMvM(cam.getViewMat());
 
-		material->upload();
-		texture->bind();
+		texture->bind(GL_MODULATE);
 		gluSphere(qObj, r, 100, 100);
 		texture->unbind();
 

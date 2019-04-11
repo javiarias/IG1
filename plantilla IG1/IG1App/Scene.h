@@ -39,6 +39,8 @@ public:
 
 	void changeSceneMode();
 
+	void toggleDirLight();
+
 	enum TextureEnum {
 		Sun,
 		Moon,
@@ -82,6 +84,7 @@ protected:
 	void clearScene();
 
 	bool isSceneIn3D = false;
+	bool isDirLightOn = true;
 
 	//luces 
 	DirLight* dirLight;
