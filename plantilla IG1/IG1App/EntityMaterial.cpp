@@ -21,3 +21,5 @@ void EntityMaterial::setMaterial(Material * mat)
 {
 	material = mat;
 }
+
+

@@ -35,7 +35,15 @@ void Scene::init()
 		}
 		mats.push_back(mat);
 	}
+	dirLight = new DirLight();
+	dirLight->setDir(glm::fvec3(0, -0.25, -1));
+	dirLight->uploadLI();
+	dirLight->enable();
 
+	camLight = new SpotLight();
+
+
+	//camLight->setPos(); (Colocar donde esté la cámara)
 	initQuad();
 }
 //-------------------------------------------------------------------------
@@ -56,10 +64,13 @@ Scene::~Scene()
 
 void Scene::render(Camera const& cam)
 {
+	dirLight->upload(cam.getViewMat());
+	//camLight->upload(cam.getViewMat());
 	for (Entity* el: grObjects)
 	{
 		el->render(cam);
 	}
+	
 }
 //-------------------------------------------------------------------------
 

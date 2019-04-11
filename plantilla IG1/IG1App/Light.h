@@ -9,7 +9,7 @@ using namespace glm;
 
 class Light { // abstract class
 protected:
-	static GLuint cont; // valor inicial: cont = 0
+	GLuint cont = 0; // valor inicial: cont = 0
 	GLuint id = GL_LIGHT0 + GL_MAX_LIGHTS; // GL_LIGHTi
 
 	fvec4 ambient = { 0.1, 0.1, 0.1, 1 };

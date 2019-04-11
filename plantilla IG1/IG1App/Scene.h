@@ -19,6 +19,8 @@
 #include "Cristalera.h"
 #include "Hierba.h"
 #include "Sphere.h"
+#include "DirLight.h"
+#include "SpotLight.h"
 
 #include <vector>
 
@@ -80,6 +82,11 @@ protected:
 	void clearScene();
 
 	bool isSceneIn3D = false;
+
+	//luces 
+	DirLight* dirLight;
+	
+	SpotLight* camLight;
 };
 
 //-------------------------------------------------------------------------

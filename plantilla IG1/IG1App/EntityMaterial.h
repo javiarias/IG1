@@ -13,5 +13,7 @@ public:
 	void setTexture(Texture* tex);
 
 	void setMaterial(Material* mat);
+
+	virtual void render(Camera const& cam) {};
 };
 

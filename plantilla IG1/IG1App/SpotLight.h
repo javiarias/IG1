@@ -5,6 +5,6 @@ class SpotLight :
 {
 public:
 	SpotLight() : PosLight() {  };
-	~SpotLight();
+	~SpotLight() {}
 };
 

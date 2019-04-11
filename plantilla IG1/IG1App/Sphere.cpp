@@ -19,7 +19,7 @@ void Sphere ::render(Camera const& cam)
 {
 	if (qObj != nullptr) {
 		glEnable(GL_CULL_FACE);
-
+		material->upload();
 		gluQuadricDrawStyle(qObj, GLU_FILL);
 		gluQuadricTexture(qObj, GL_TRUE);
 		gluQuadricNormals(qObj, GLU_SMOOTH);
