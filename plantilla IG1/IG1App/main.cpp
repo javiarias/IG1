@@ -221,11 +221,17 @@ void key(unsigned char key, int x, int y)
   case 'e':
 	  camera.moveUD(5);
 	  break;
-  case 'c':
+  case 't':
 	  topDown = !topDown;
 	  break;
-  case 'v':
+  case 'c':
 	  scene.toggleDirLight();
+	  break;
+  case 'b':
+	  scene.toggleSphereLight();
+	  break;
+  case 'v':
+	  scene.toggleCamLight();
 	  break;
   default:
 	need_redisplay = false;

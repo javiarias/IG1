@@ -36,6 +36,9 @@ void Scene::init()
 			case Pewter:
 				mat->setPewter();
 				break;
+			case AAA:
+				mat->setAAAA();
+				break;
 		}
 		mats.push_back(mat);
 	}
@@ -72,8 +75,10 @@ void Scene::render(Camera const& cam)
 	dirLight->upload(cam.getViewMat());
 
 	camLight->setPos(cam.getPos());
-	//camLight->setDir(cam.getLook());
+	camLight->setDir(cam.getLook());
 	camLight->upload(cam.getViewMat());
+
+	sphereLight->light->upload(cam.getViewMat());
 
 	for (Entity* el: grObjects)
 	{
@@ -256,6 +261,14 @@ void Scene::initQuad()
 	auxMatEntity->setModelMat(auxMat);
 	grObjects.push_back(auxMatEntity);
 
+	sphereLight = new SphereLight(baseRadius / 4, dvec3(0, baseRadius * 7, 0));
+	sphereLight->setTexture(textures[Lego]);
+	sphereLight->setMaterial(mats[AAA]);
+	auxMat = sphereLight->getModelMat();
+	auxMat = translate(auxMat, dvec3(0, baseRadius * 7, 0));
+	sphereLight->setModelMat(auxMat);
+	grObjects.push_back(sphereLight);
+
 }
 
 void Scene::clearScene()
@@ -283,5 +296,25 @@ void Scene::toggleDirLight()
 		dirLight->enable();
 
 	isDirLightOn = !isDirLightOn;
+}
+
+void Scene::toggleCamLight()
+{
+	if (isCamLightOn)
+		camLight->disable();
+	else
+		camLight->enable();
+
+	isCamLightOn = !isCamLightOn;
+}
+
+void Scene::toggleSphereLight()
+{
+	if (isSphereLightOn)
+		sphereLight->light->disable();
+	else
+		sphereLight->light->enable();
+
+	isSphereLightOn = !isSphereLightOn;
 }
 

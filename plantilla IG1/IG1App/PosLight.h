@@ -10,7 +10,7 @@ public:
 		glMatrixMode(GL_MODELVIEW);
 		glLoadMatrixd(value_ptr(modelViewMat));
 		glLightfv(id, GL_POSITION, value_ptr(position));
-		uploadLI();
+		//uploadLI();
 	};
 	void setPos(fvec3 pos) { position = fvec4(pos, 1.0); };
 };

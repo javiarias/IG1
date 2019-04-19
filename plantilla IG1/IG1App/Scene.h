@@ -21,6 +21,7 @@
 #include "Sphere.h"
 #include "DirLight.h"
 #include "SpotLight.h"
+#include "SphereLight.h"
 
 #include <vector>
 
@@ -40,6 +41,8 @@ public:
 	void changeSceneMode();
 
 	void toggleDirLight();
+	void toggleCamLight();
+	void toggleSphereLight();
 
 	enum TextureEnum {
 		Sun,
@@ -49,7 +52,8 @@ public:
 		Desert,
 		Red,
 		Terrain,
-		TerrainG
+		TerrainG,
+		Lego
 	};
 
 	std::vector<pair<int, string>> TexturePaths{
@@ -60,13 +64,15 @@ public:
 	{Desert, "desierto.bmp"},
 	{Red, "BarrenReds.bmp"},
 	{Terrain, "terreno.bmp"},
-	{TerrainG, "terrenoG.bmp"}
+	{TerrainG, "terrenoG.bmp"},
+	{Lego, "lego.bmp"}
 	};
 	
 	enum MaterialEnum {
 		Copper,
 		Chrome,
 		Pewter,
+		AAA,
 
 
 		END
@@ -85,11 +91,15 @@ protected:
 
 	bool isSceneIn3D = false;
 	bool isDirLightOn = true;
+	bool isCamLightOn = true;
+	bool isSphereLightOn = true;
 
 	//luces 
 	DirLight* dirLight;
 	
 	SpotLight* camLight;
+
+	SphereLight* sphereLight;
 };
 
 //-------------------------------------------------------------------------
