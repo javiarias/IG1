@@ -75,7 +75,7 @@ void Scene::render(Camera const& cam)
 	dirLight->upload(cam.getViewMat());
 
 	camLight->setPos(cam.getPos());
-	camLight->setDir(cam.getLook());
+	camLight->setDir(cam.getFront());
 	camLight->upload(cam.getViewMat());
 
 	sphereLight->light->upload(cam.getViewMat());

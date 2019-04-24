@@ -56,6 +56,7 @@ public:
 
 	dvec3 const& getPos() const { return eye; };
 	dvec3 const& getLook() const { return look; };
+  dvec3 const& getFront() const { return front; };
 
 protected:
 	
