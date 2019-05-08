@@ -8,6 +8,7 @@ Mesh::~Mesh(void)
 {
   delete[] vertices;  vertices = nullptr;
   delete[] colors;    colors = nullptr;
+  delete[] normals; normals = nullptr;
 }
 //-------------------------------------------------------------------------
 
@@ -25,6 +26,12 @@ void Mesh::render()
 	if (texCoords != nullptr) {
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(2, GL_DOUBLE, 0, texCoords);
+	}
+
+	if (normals != nullptr) {
+		glEnableClientState(GL_NORMAL_ARRAY);  
+		glNormalPointer(GL_DOUBLE, 0, normals);
+		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 	
     glDrawArrays(primitive, 0, numVertices);   // primitive graphic, first index and number of elements to be rendered
