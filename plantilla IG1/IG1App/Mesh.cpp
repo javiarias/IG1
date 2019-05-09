@@ -31,7 +31,6 @@ void Mesh::render()
 	if (normals != nullptr) {
 		glEnableClientState(GL_NORMAL_ARRAY);  
 		glNormalPointer(GL_DOUBLE, 0, normals);
-		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 	
     glDrawArrays(primitive, 0, numVertices);   // primitive graphic, first index and number of elements to be rendered
@@ -39,6 +38,7 @@ void Mesh::render()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 	
   }
 }
