@@ -229,13 +229,17 @@ void Scene::initQuad()
 
 	grObjects.push_back(new EjesRGB(100));
 
+	auxMatEntity = new Surface(40, 40);
+	auxMatEntity->setTexture(textures[Sun]);
+	grObjects.push_back(auxMatEntity);
+
 	auxMatEntity = new Sphere(baseRadius);
 	auxMatEntity->setTexture(textures[Sun]);
 	auxMatEntity->setMaterial(mats[Copper]);
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	//grObjects.push_back(auxMatEntity);
 
 	auxMatEntity = new Sphere(baseRadius / 2);
 	auxMatEntity->setTexture(textures[Mars]);
@@ -243,7 +247,7 @@ void Scene::initQuad()
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(baseRadius / 4, baseRadius * 1.6, -baseRadius * 1.5));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	//grObjects.push_back(auxMatEntity);
 
 	auxMatEntity = new Sphere(baseRadius / 3);
 	auxMatEntity->setTexture(textures[Moon]);
@@ -251,7 +255,7 @@ void Scene::initQuad()
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(-baseRadius / 2.5, baseRadius * 0.8, -baseRadius / 3));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	//grObjects.push_back(auxMatEntity);
 
 	auxMatEntity = new Sphere(baseRadius * 5);
 	auxMatEntity->setTexture(textures[Earth]);
@@ -259,7 +263,7 @@ void Scene::initQuad()
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(0, -baseRadius * 5, 0));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	//grObjects.push_back(auxMatEntity);
 
 	sphereLight = new SphereLight(baseRadius / 4, dvec3(0, baseRadius * 7, 0));
 	sphereLight->setTexture(textures[Lego]);
@@ -267,7 +271,7 @@ void Scene::initQuad()
 	auxMat = sphereLight->getModelMat();
 	auxMat = translate(auxMat, dvec3(0, baseRadius * 7, 0));
 	sphereLight->setModelMat(auxMat);
-	grObjects.push_back(sphereLight);
+	//grObjects.push_back(sphereLight);
 
 }
 
