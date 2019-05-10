@@ -15,7 +15,6 @@ void Scene::init()
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_NORMALIZE);
-
 	glShadeModel(GL_FLAT);
 
 	for (int i = 0; i < TexturePaths.size(); i++) {
@@ -45,11 +44,13 @@ void Scene::init()
 
 	dirLight = new DirLight();
 	dirLight->setDir(fvec3(0, 0.25, 1));
-	dirLight->uploadLI();
+	dirLight->setAmb(fvec4(1, 1, 1, 1));
 	dirLight->enable();
 
 	camLight = new SpotLight();
 	camLight->uploadLI();
+	camLight->setAng(20.0);
+	camLight->setExp(50);
 	camLight->enable();
 
 	initQuad();
@@ -229,14 +230,14 @@ void Scene::initQuad()
 
 	grObjects.push_back(new EjesRGB(100));
 
-	auxMatEntity = new Surface(40, 40, 1);
+	auxMatEntity = new Surface(40, 400, 1);
 	auxMatEntity->setTexture(textures[TerrainG]);
 	auxMatEntity->setMaterial(mats[Chrome]);
 	grObjects.push_back(auxMatEntity);
 
 	auxMatEntity = new Sphere(baseRadius);
 	auxMatEntity->setTexture(textures[Sun]);
-	auxMatEntity->setMaterial(mats[Copper]);
+	auxMatEntity->setMaterial(mats[AAA]);
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
 	auxMatEntity->setModelMat(auxMat);
@@ -252,7 +253,7 @@ void Scene::initQuad()
 
 	auxMatEntity = new Sphere(baseRadius / 3);
 	auxMatEntity->setTexture(textures[Moon]);
-	auxMatEntity->setMaterial(mats[Chrome]);
+	auxMatEntity->setMaterial(mats[Pewter]);
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(-baseRadius / 2.5, baseRadius * 0.8, -baseRadius / 3));
 	auxMatEntity->setModelMat(auxMat);
