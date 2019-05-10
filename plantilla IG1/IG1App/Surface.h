@@ -9,7 +9,7 @@ protected:
 	IndexMesh *m;
 
 public:
-	Surface(GLuint l, GLuint numDiv);
+	Surface(GLuint l, GLuint numDiv, GLdouble curve);
 	~Surface();
 
 	void render(Camera const& cam);
