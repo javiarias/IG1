@@ -14,8 +14,8 @@ protected:
 	dvec3 relativePos;
 	dvec3 originalPos;
 
+	dmat4 relativeMat;
 	dmat4 updateMat;
-	dmat4 updateMat2;
 	
 	GLdouble angle = 0;
 public:
@@ -29,10 +29,6 @@ public:
 
 	void setMaterial2(Material* mat);
 
-	dmat4 getLightMat(dmat4 camMat) { return camMat * modelMat * updateMat2; };
-
 	virtual void update(GLuint timeElapsed);
-
-	virtual void setModelMat(glm::dmat4 const& aMat);
 };
 
