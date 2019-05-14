@@ -79,7 +79,7 @@ void Scene::render(Camera const& cam)
 	camLight->setDir(cam.getFront());
 	camLight->upload(cam.getViewMat());
 
-	sphereLight->light->upload(cam.getViewMat() * sphereLight->getModelMat());
+	sphereLight->uploadLight(cam.getViewMat() * sphereLight->getModelMat());
 
 	for (Entity* el: grObjects)
 	{

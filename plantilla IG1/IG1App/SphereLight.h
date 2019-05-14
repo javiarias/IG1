@@ -17,7 +17,14 @@ protected:
 	dmat4 relativeMat;
 	dmat4 updateMat;
 	
-	GLdouble angle = 0;
+	GLdouble updateAngle = 0;
+	GLdouble rotationAngle = 0;
+
+	GLint rotationDir = 1;
+
+	dmat4 mat1;
+	dmat4 mat2;
+
 public:
 	SphereLight(GLuint radius, GLuint radius2, dvec3 pos, dvec3 relativePos);
 	~SphereLight();
@@ -30,5 +37,7 @@ public:
 	void setMaterial2(Material* mat);
 
 	virtual void update(GLuint timeElapsed);
+
+	void uploadLight(dmat4 camMat);
 };
 

@@ -37,17 +37,44 @@ void SphereLight::setMaterial2(Material* mat)
 void SphereLight::update(GLuint timeElapsed)
 {
 
-	angle += timeElapsed * 0.001;
-	if (angle >= 360)
-		angle -= 360;
+	updateAngle += timeElapsed * 0.001;
+	if (updateAngle >= 360)
+		updateAngle -= 360;
+
+	rotationAngle += timeElapsed * 0.1 * rotationDir;
+	if (rotationAngle >= 45) {
+		rotationAngle = 45;
+		rotationDir = -1;
+	}
+	else if (rotationAngle <= -45) {
+		rotationAngle = -45;
+		rotationDir = 1;
+	}
+}
+
+void SphereLight::uploadLight(dmat4 camMat) {
+
+	light->upload(camMat * mat1);
+
 }
 
 
 void SphereLight::render(Camera const& cam)
 {
 	if (qObj != nullptr) {
-		dmat4 aux = modelMat;
+		dmat4 originalMat = modelMat;
 
+	//update matrices
+		GLdouble a = sqrt(4 * pi<double>() * r2 * r2) / 2;
+		GLdouble b = r2;
+		dmat4 updateMat = translate(modelMat, dvec3(a * cos(updateAngle), b * sin(updateAngle) * sin(updateAngle), -a * sin(updateAngle) * cos(updateAngle)));
+
+		mat1 = rotate(updateMat * relativeMat, radians(rotationAngle), dvec3(0, 1.0, 0)) / (updateMat * relativeMat) * updateMat;
+
+		mat2 = updateMat * relativeMat;
+
+
+		modelMat = mat1;
 
 		glEnable(GL_CULL_FACE);
 
@@ -63,12 +90,9 @@ void SphereLight::render(Camera const& cam)
 		gluSphere(qObj, r, 50, 50);
 		texture->unbind();
 
-		modelMat = aux * relativeMat;
 
-		GLdouble a = sqrt(4 * pi<double>() * r2 * r2) / 2;
-		GLdouble b = r2;
-		modelMat = translate(modelMat, dvec3(a * cos(angle), b * sin(angle) * sin(angle), -a * sin(angle) * cos(angle)));
-
+		modelMat = mat2;
+		
 		material2->upload();
 		gluQuadricDrawStyle(qObj2, GLU_FILL);
 		gluQuadricTexture(qObj2, GL_TRUE);
@@ -81,7 +105,8 @@ void SphereLight::render(Camera const& cam)
 		gluSphere(qObj2, r2, 100, 100);
 		texture2->unbind();
 
-		modelMat = aux;
+
+		modelMat = originalMat;
 
 		glDisable(GL_CULL_FACE);
 	}
