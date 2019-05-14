@@ -5,10 +5,11 @@ class Sphere :
 {
 protected:
 	GLUquadricObj *qObj;
-  GLuint r;
+	GLuint r;
+
 public:
 	Sphere(GLuint radius);
 	~Sphere();
-	void render(Camera const& cam);
+	virtual void render(Camera const& cam);
 };
 

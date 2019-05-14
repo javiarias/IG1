@@ -79,7 +79,7 @@ void Scene::render(Camera const& cam)
 	camLight->setDir(cam.getFront());
 	camLight->upload(cam.getViewMat());
 
-	sphereLight->light->upload(cam.getViewMat());
+	sphereLight->light->upload(sphereLight->getLightMat(cam.getViewMat()));
 
 	for (Entity* el: grObjects)
 	{
@@ -239,17 +239,17 @@ void Scene::initQuad()
 	auxMatEntity->setTexture(textures[Sun]);
 	auxMatEntity->setMaterial(mats[AAA]);
 	auxMat = auxMatEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(0, baseRadius * 3, 0));
+	auxMat = translate(auxMat, dvec3(0, baseRadius * 2, 0));
 	auxMatEntity->setModelMat(auxMat);
 	grObjects.push_back(auxMatEntity);
 
-	auxMatEntity = new Sphere(baseRadius / 2);
+	/*auxMatEntity = new Sphere(baseRadius / 2);
 	auxMatEntity->setTexture(textures[Mars]);
 	auxMatEntity->setMaterial(mats[Copper]);
 	auxMat = auxMatEntity->getModelMat();
 	auxMat = translate(auxMat, dvec3(baseRadius / 4, baseRadius * 1.6, -baseRadius * 1.5));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	grObjects.push_back(auxMatEntity);*/
 
 	auxMatEntity = new Sphere(baseRadius / 3);
 	auxMatEntity->setTexture(textures[Moon]);
@@ -259,19 +259,22 @@ void Scene::initQuad()
 	auxMatEntity->setModelMat(auxMat);
 	grObjects.push_back(auxMatEntity);
 
-	/*auxMatEntity = new Sphere(baseRadius * 5);
+	auxMatEntity = new Sphere(baseRadius * 5);
 	auxMatEntity->setTexture(textures[Earth]);
 	auxMatEntity->setMaterial(mats[Pewter]);
 	auxMat = auxMatEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(0, -baseRadius * 5, 0));
+	auxMat = translate(auxMat, dvec3(0, -baseRadius * 7, 0));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);*/
+	grObjects.push_back(auxMatEntity);
 
-	sphereLight = new SphereLight(baseRadius / 4, dvec3(0, baseRadius * 7, 0));
+	dvec3 spherePos = dvec3(0, baseRadius * 4, 0);
+	sphereLight = new SphereLight(baseRadius / 3, baseRadius / 5, spherePos, dvec3(-baseRadius / 2, baseRadius / 2, -baseRadius));
 	sphereLight->setTexture(textures[Lego]);
-	sphereLight->setMaterial(mats[AAA]);
+	sphereLight->setMaterial(mats[Copper]);
+	sphereLight->setTexture2(textures[Lego]);
+	sphereLight->setMaterial2(mats[AAA]);
 	auxMat = sphereLight->getModelMat();
-	auxMat = translate(auxMat, dvec3(0, baseRadius * 7, 0));
+	auxMat = translate(auxMat, spherePos);
 	sphereLight->setModelMat(auxMat);
 	grObjects.push_back(sphereLight);
 
