@@ -14,7 +14,8 @@ SphereLight::SphereLight(GLuint radius, GLuint radius2, dvec3 pos, dvec3 relativ
 
 	light = new SpotLight();
 	light->setDir(fvec3(0, -1, 0));
-	light->setAng(90.0);
+	light->setAng(40.0);
+	light->setExp(5.0);
 	light->enable();
 }
 
@@ -54,6 +55,16 @@ void SphereLight::update(GLuint timeElapsed)
 
 void SphereLight::uploadLight(dmat4 camMat) {
 
+	//update matrices
+	GLdouble a = sqrt(4 * pi<double>() * r2 * r2) / 2;
+	GLdouble b = r2;
+	dmat4 updateMat = translate(modelMat, dvec3(a * cos(updateAngle), b * sin(updateAngle) * sin(updateAngle), -a * sin(updateAngle) * cos(updateAngle)));
+
+	mat1 = rotate(updateMat * relativeMat, radians(rotationAngle), dvec3(0, 1.0, 0)) / (updateMat * relativeMat) * updateMat;
+
+	mat2 = updateMat * relativeMat;
+
+
 	light->upload(camMat * mat1);
 
 }
@@ -63,16 +74,6 @@ void SphereLight::render(Camera const& cam)
 {
 	if (qObj != nullptr) {
 		dmat4 originalMat = modelMat;
-
-	//update matrices
-		GLdouble a = sqrt(4 * pi<double>() * r2 * r2) / 2;
-		GLdouble b = r2;
-		dmat4 updateMat = translate(modelMat, dvec3(a * cos(updateAngle), b * sin(updateAngle) * sin(updateAngle), -a * sin(updateAngle) * cos(updateAngle)));
-
-		mat1 = rotate(updateMat * relativeMat, radians(rotationAngle), dvec3(0, 1.0, 0)) / (updateMat * relativeMat) * updateMat;
-
-		mat2 = updateMat * relativeMat;
-
 
 		modelMat = mat1;
 

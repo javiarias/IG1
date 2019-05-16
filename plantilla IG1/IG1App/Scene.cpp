@@ -49,8 +49,8 @@ void Scene::init()
 
 	camLight = new SpotLight();
 	camLight->uploadLI();
-	camLight->setAng(20.0);
-	camLight->setExp(50);
+	camLight->setAng(40.0);
+	camLight->setExp(5);
 	camLight->enable();
 
 	initQuad();
@@ -230,10 +230,13 @@ void Scene::initQuad()
 
 	grObjects.push_back(new EjesRGB(100));
 
-	/*auxMatEntity = new Surface(40, 400, 1);
+	auxMatEntity = new Surface(400, 400, 1);
 	auxMatEntity->setTexture(textures[TerrainG]);
 	auxMatEntity->setMaterial(mats[Chrome]);
-	grObjects.push_back(auxMatEntity);*/
+	auxMat = auxMatEntity->getModelMat();
+	auxMat = translate(auxMat, dvec3(0, -baseRadius * 7, 0));
+	auxMatEntity->setModelMat(auxMat);
+	grObjects.push_back(auxMatEntity);
 
 	auxMatEntity = new Sphere(baseRadius);
 	auxMatEntity->setTexture(textures[Sun]);
@@ -259,13 +262,13 @@ void Scene::initQuad()
 	auxMatEntity->setModelMat(auxMat);
 	grObjects.push_back(auxMatEntity);
 
-	auxMatEntity = new Sphere(baseRadius * 5);
+	/*auxMatEntity = new Sphere(baseRadius * 5);
 	auxMatEntity->setTexture(textures[Earth]);
 	auxMatEntity->setMaterial(mats[Pewter]);
 	auxMat = auxMatEntity->getModelMat();
-	auxMat = translate(auxMat, dvec3(0, -baseRadius * 7, 0));
+	auxMat = translate(auxMat, dvec3(0, -baseRadius * 9, 0));
 	auxMatEntity->setModelMat(auxMat);
-	grObjects.push_back(auxMatEntity);
+	grObjects.push_back(auxMatEntity);*/
 
 	dvec3 spherePos = dvec3(0, -baseRadius, 0);
 	sphereLight = new SphereLight(baseRadius / 4, baseRadius / 2, spherePos, dvec3(-baseRadius / 2, baseRadius / 2, -baseRadius));
