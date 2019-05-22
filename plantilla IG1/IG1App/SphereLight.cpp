@@ -56,11 +56,11 @@ void SphereLight::update(GLuint timeElapsed)
 void SphereLight::uploadLight(dmat4 camMat) {
 
 	//update matrices
-	GLdouble a = sqrt(4 * pi<double>() * r2 * r2) / 2;
+	GLdouble a = r2 * r2;// sqrt(4 * pi<double>() * r2 * r2) / 2;
 	GLdouble b = r2;
-	dmat4 updateMat = translate(modelMat, dvec3(a * cos(updateAngle), b * sin(updateAngle) * sin(updateAngle), -a * sin(updateAngle) * cos(updateAngle)));
+	dmat4 updateMat = translate(dmat4(1), dvec3(a * cos(updateAngle), b * sin(updateAngle) * sin(updateAngle), -a * sin(updateAngle) * cos(updateAngle)));
 
-	mat1 = rotate(updateMat * relativeMat, radians(rotationAngle), dvec3(0, 1.0, 0)) / (updateMat * relativeMat) * updateMat;
+	mat1 = rotate(updateMat * relativeMat, radians(rotationAngle), dvec3(1.0, 1.0, 1.0)) / (updateMat * relativeMat) * updateMat;
 
 	mat2 = updateMat * relativeMat;
 

@@ -271,7 +271,7 @@ void Scene::initQuad()
 	grObjects.push_back(auxMatEntity);*/
 
 	dvec3 spherePos = dvec3(0, -baseRadius, 0);
-	sphereLight = new SphereLight(baseRadius / 4, baseRadius / 2, spherePos, dvec3(-baseRadius / 2, baseRadius / 2, -baseRadius));
+	sphereLight = new SphereLight(baseRadius / 4, baseRadius / 2, spherePos, dvec3(0, baseRadius/2, 0));
 	sphereLight->setTexture(textures[Lego]);
 	sphereLight->setMaterial(mats[AAA]);
 	sphereLight->setTexture2(textures[Lego]);
